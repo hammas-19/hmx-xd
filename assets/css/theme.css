@@ -1,0 +1,39 @@
+/* Define theme variables */
+@theme {
+  /* Colors */
+  --color-Bluish: #2D6FBC;
+  --color-clearBlue: #0066E3;
+  --color-AliceBlue: #eef6ff;
+  --color-Azure: #ecfffa;
+  --color-BrightNavy: #1779D3;
+  --color-BalticSea: #262626;
+  --color-snowDrift: #F7F9FA;
+  --color-blackCow: #4A4A4A;
+  --color-bananaYellow: #FFDC34;
+  --color-lightGrey: #DADADA;
+  --color-warningRed: #d90429;
+  --color-white: #ffffff;
+  --color-green: #00ff00;
+  --color-lightgreen: #3adb3161;
+  --color-darkgreen: #288539;
+  /* new colors */
+  --color-bubbles: #E3F3FD;
+  --color-darkLiver: #4F4F4F;
+  --color-oxford: #031F42;
+  --color-cobalt: #084FA8;
+  --color-antiFlash: #F2F1F6;
+  --color-crayola: #2582F6;
+  --color-platinum: #E6E6E6;
+  --color-ghost: #F5F7FC;
+  
+  /* Screen sizes */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --breakpoint-xl: 1440px;
+  
+  /* Font families */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-outfit: 'Outfit', sans-serif;
+}

@@ -1,0 +1,293 @@
+/* Import Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* Import theme */
+@import "./theme.css";
+
+/* Default Styling */
+
+body {
+  font-family: var(--font-outfit);
+  color: var(--color-darkLiver);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.button-primary {
+  padding: 0.5rem 10rem;
+  background-color: var(--color-Bluish);
+  color: white;
+  border-radius: 0.375rem;
+}
+.def-container {
+    @apply xl:max-w-7xl mx-auto px-5;
+}
+.def-padding {
+    @apply md:py-12 py-8;
+}
+.def-margin {
+    @apply md:my-12 my-8;
+}
+.def-padding-full {
+    @apply md:py-[86px] py-16;
+}
+.def-margin-full{
+    @apply md:my-[86px] my-16;
+}
+.def-paragraph {
+    @apply md:text-lg text-sm text-darkLiver;
+}
+.def-heading {
+    @apply md:text-[50px] text-4xl font-bold text-black;
+}
+.def-hero-heading {
+    @apply md:text-[55px] text-4xl font-semibold text-white;
+}
+
+/* Buttons and Others */
+.btn-primary {
+  background-color: #2582F6;
+  color: white;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 #262626;
+  box-shadow: 0 0 0 0 #262626;
+}
+
+.btn-primary:hover {
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+  -webkit-box-shadow: 4px 4px 0 0 #262626;
+  box-shadow: 4px 4px 0 0 #262626;
+}
+
+.btn-primary:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 #262626;
+  box-shadow: 0 0 0 0 #262626;
+}
+
+/* secondary button */
+
+.btn-secondary {
+  background-color: #262626;
+  cursor: pointer;
+  color: white;
+  border: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 white;
+  box-shadow: 0 0 0 0 white;
+}
+
+.btn-secondary:hover {
+  -webkit-transform: translateY(-4px) translateX(-4px);
+  -ms-transform: translateY(-4px) translateX(-4px);
+  transform: translateY(-4px) translateX(-4px);
+  -webkit-box-shadow: 4px 4px white, 4px 4px 0px 1px #262626;
+  box-shadow: 4px 4px white, 4px 4px 0px 1px #262626;
+}
+
+.btn-secondary:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 white;
+  box-shadow: 0 0 0 0 white;
+}
+.btn-Ice {
+  background-color: #1967D226;
+  cursor: pointer;
+  color: #005EB5;
+  border: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 white;
+  box-shadow: 0 0 0 0 white;
+}
+
+.btn-Ice:hover {
+  -webkit-transform: translateY(-4px) translateX(-4px);
+  -ms-transform: translateY(-4px) translateX(-4px);
+  transform: translateY(-4px) translateX(-4px);
+  -webkit-box-shadow: 4px 4px white, 4px 4px 0px 1px #005EB5;
+  box-shadow: 4px 4px white, 4px 4px 0px 1px #005EB5;
+}
+
+.btn-Ice:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 white;
+  box-shadow: 0 0 0 0 white;
+}
+
+/* light button */
+
+.btn-light {
+  background-color: white;
+  color: #2582F6;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 #2582F6;
+  box-shadow: 0 0 0 0 #2582F6;
+}
+
+.btn-light:hover {
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+  -webkit-box-shadow: 4px 4px 0 0 #2582F6;
+  box-shadow: 4px 4px 0 0 #2582F6;
+}
+
+.btn-light-hovered {
+  background-color: white;
+  color: #2582F6;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 4px 4px 0 0 #2582F6;
+  box-shadow: 4px 4px 0 0 #2582F6;
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+}
+
+.btn-light:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 #2582F6;
+  box-shadow: 0 0 0 0 #2582F6;
+}
+/* outline button */
+
+.btn-outline {
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border: 1px solid #DADADA;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 #DADADA;
+  box-shadow: 0 0 0 0 #DADADA;
+}
+
+.btn-outline:hover {
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+  -webkit-box-shadow: 4px 4px 0 0 #DADADA;
+  box-shadow: 4px 4px 0 0 #DADADA;
+}
+
+.btn-outline-hovered {
+  background-color: white;
+  color: white;
+  border: 1px solid #DADADA;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 4px 4px 0 0 #DADADA;
+  box-shadow: 4px 4px 0 0 #DADADA;
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+}
+
+.btn-outline:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 #DADADA;
+  box-shadow: 0 0 0 0 #DADADA;
+}
+/* Button Ghost */
+.btn-ghost {
+  background-color: #ECEDF2;
+  color: #4F4F4F;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 #262626;
+  box-shadow: 0 0 0 0 #262626;
+}
+
+.btn-ghost:hover {
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+  -webkit-box-shadow: 4px 4px 0 0 #262626;
+  box-shadow: 4px 4px 0 0 #262626;
+}
+
+.btn-ghost:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 #262626;
+  box-shadow: 0 0 0 0 #262626;
+}
+
+/* CTA button */
+
+.btn-cta {
+  background-color: #FFDC34;
+  color: #262626;
+  cursor: pointer;
+  border: 1px solid #4A4A4A;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 0 0 0 #4A4A4A;
+  box-shadow: 0 0 0 0 #4A4A4A;
+}
+
+.btn-cta:hover {
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+  -webkit-box-shadow: 4px 4px 0 0 #4A4A4A;
+  box-shadow: 4px 4px 0 0 #4A4A4A;
+}
+
+.btn-cta-hovered {
+  background-color: #FFDC34;
+  color: #262626;
+  border: 1px solid #4A4A4A;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 4px 4px 0 0 #4A4A4A;
+  box-shadow: 4px 4px 0 0 #4A4A4A;
+  -webkit-transform: translateY(-3px) translateX(-3px);
+  -ms-transform: translateY(-3px) translateX(-3px);
+  transform: translateY(-3px) translateX(-3px);
+}
+
+.btn-cta:active {
+  -webkit-transform: translateY(2px) translateX(1px);
+  -ms-transform: translateY(2px) translateX(1px);
+  transform: translateY(2px) translateX(1px);
+  -webkit-box-shadow: 0 0 0 0 #4A4A4A;
+  box-shadow: 0 0 0 0 #4A4A4A;
+}
+/* Phone Input */
+.vue-tel-input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.vue-tel-input input {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  background-color: transparent !important;
+}
+.vue-tel-input:focus-within {
+  outline: 2px solid #0a488f00;
+}
