@@ -13,6 +13,12 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+.top-conic {
+  background: radial-gradient(ellipse at top, #bfdef9, #e7f3fd, #fcfcfc);
+}
+.bottom-conic {
+  background: radial-gradient(ellipse at top, #bfdef9, #e7f3fd, #fcfcfc);
+}
 .button-primary {
   padding: 0.5rem 10rem;
   background-color: var(--color-Bluish);

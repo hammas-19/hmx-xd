@@ -17,7 +17,7 @@
   --color-lightgreen: #3adb3161;
   --color-darkgreen: #288539;
   /* new colors */
-  --color-bubbles: #E3F3FD;
+  --color-bubbles: #ebf5fa;
   --color-darkLiver: #4F4F4F;
   --color-oxford: #031F42;
   --color-cobalt: #084FA8;
@@ -25,6 +25,7 @@
   --color-crayola: #2582F6;
   --color-platinum: #E6E6E6;
   --color-ghost: #F5F7FC;
+  --color-boss: #1a1a1a;
   
   /* Screen sizes */
   --breakpoint-sm: 480px;
@@ -33,7 +34,7 @@
   --breakpoint-xl: 1440px;
   
   /* Font families */
-  --font-sans: 'DM Sans', sans-serif;
+  --font-sans: 'Syne', sans-serif;
   --font-serif: 'Libre Baskerville', serif;
   --font-outfit: 'Outfit', sans-serif;
 }

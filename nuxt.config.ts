@@ -16,5 +16,34 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts'
-  ]
+  ],
+  fonts: {
+    families: [
+      {
+        name: 'DM Sans',
+        provider: 'google',
+        weights: ['400', '500', '600', '700']
+      },
+      {
+        name: 'Libre Baskerville',
+        provider: 'google',
+        weights: ['400', '700']
+      },
+      {
+        name: 'Outfit',
+        provider: 'google',
+        weights: ['300', '400', '500', '600', '700']
+      },
+      {
+        name: 'Inter',
+        provider: 'google',
+        weights: ['300', '400', '500', '600', '700']
+      },
+      {
+        name: 'Poppins',
+        provider: 'google',
+        weights: ['300', '400', '500', '600', '700']
+      }
+    ]
+  }
 })
