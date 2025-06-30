@@ -17,7 +17,7 @@ body {
   background: radial-gradient(ellipse at top, #bfdef9, #e7f3fd, #fcfcfc);
 }
 .bottom-conic {
-  background: radial-gradient(ellipse at top, #bfdef9, #e7f3fd, #fcfcfc);
+  background: radial-gradient(ellipse at bottom, #bfdef9, #e7f3fd, #fcfcfc);
 }
 .button-primary {
   padding: 0.5rem 10rem;
