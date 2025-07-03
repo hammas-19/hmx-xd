@@ -90,3 +90,8 @@
 <script setup>
 // No JavaScript needed! Just add the component and use data attributes
 </script>
+<style scoped>
+.main{
+  
+}
+</style>

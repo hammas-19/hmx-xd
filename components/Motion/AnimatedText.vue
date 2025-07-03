@@ -1,10 +1,11 @@
 <template>
-  <Motion :initial="fadeIn.initial" :animate="fadeIn.animate" :whileHover="fadeIn.hover"
+  <div>
+    <Motion :initial="fadeIn.initial" :animate="fadeIn.animate" :whileHover="fadeIn.hover"
     :transition="{ duration: 0.8, delay: 0.2 }">
     <component :is="tag" :class="$attrs.class">
       <template v-if="stagger">
         <Motion v-for="(letter, index) in letters" :key="index" class="inline-block" :initial="staggerIn.initial"
-          :animate="staggerIn.animate" :whileHover="staggerIn.hover"
+        :animate="staggerIn.animate" :whileHover="staggerIn.hover"
           :transition="{ duration: 0.5, delay: index * 0.1, ease: 'backOut' }">
           {{ letter === ' ' ? '\u00A0' : letter }}
         </Motion>
@@ -14,6 +15,7 @@
       </template>
     </component>
   </Motion>
+</div>
 </template>
 
 <script setup>

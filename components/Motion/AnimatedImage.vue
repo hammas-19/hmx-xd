@@ -1,8 +1,10 @@
 <template>
-  <Motion :initial="currentAnimation.initial" :animate="currentAnimation.animate" :whileHover="currentAnimation.hover"
+  <div>
+    <Motion :initial="currentAnimation.initial" :animate="currentAnimation.animate" :whileHover="currentAnimation.hover"
     :whileTap="currentAnimation.tap" :transition="{ duration: 0.6, delay: 0.8, ease: 'backOut' }">
     <img :src="src" :alt="alt" :class="[$attrs.class, 'cursor-pointer']" />
   </Motion>
+</div>
 </template>
 
 <script setup>
