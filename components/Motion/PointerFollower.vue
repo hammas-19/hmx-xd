@@ -1,9 +1,32 @@
 <template>
-  <motion.div ref="elementRef" :class="elementClass" :style="{ x, y, ...customStyle }">
-    <slot>
-      <!-- Default content if no slot provided -->
-      <div class="default-follower"></div>
-    </slot>
+  <motion.div ref="elementRef" class="pointer-follower"
+    :class="[`pointer-${currentState}`, { 'pointer-hidden': !isVisible }]" :style="{ x, y }">
+    <!-- Default pointer -->
+    <div v-if="currentState === 'default'" class="pointer-default backdrop-blur-[1.5px] border border-bubbles text-[#5757573b]"></div>
+
+    <!-- Button pointer -->
+    <div v-else-if="currentState === 'button'" class="pointer-button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </div>
+
+    <!-- Link pointer -->
+    <div v-else-if="currentState === 'link'" class="pointer-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+      </svg>
+    </div>
+
+    <!-- Image pointer -->
+    <div v-else-if="currentState === 'image'" class="pointer-image">
+      VIEW
+    </div>
+
+    <!-- Text pointer -->
+    <div v-else-if="currentState === 'text'" class="pointer-text">
+      {{ customText }}
+    </div>
   </motion.div>
 </template>
 
@@ -13,142 +36,157 @@ import { ref, onMounted, onUnmounted, computed } from "vue"
 
 // Props
 const props = defineProps({
-  // Spring configuration
-  damping: {
-    type: Number,
-    default: 3
-  },
-  stiffness: {
-    type: Number,
-    default: 50
-  },
-  restDelta: {
-    type: Number,
-    default: 0.001
-  },
-  // Visual properties
   size: {
     type: [Number, String],
-    default: 100
+    default: 20
   },
   color: {
     type: String,
     default: '#ff0088'
   },
+  damping: {
+    type: Number,
+    default: 5
+  },
+  stiffness: {
+    type: Number,
+    default: 100
+  },
   shape: {
     type: String,
     default: 'circle',
     validator: (value) => ['circle', 'square', 'rounded'].includes(value)
-  },
-  // Behavior
-  followMouse: {
-    type: Boolean,
-    default: true
-  },
-  offset: {
-    type: Object,
-    default: () => ({ x: 0, y: 0 })
-  },
-  // Custom classes
-  class: {
-    type: String,
-    default: ''
   }
 })
 
-// Spring configuration
-const spring = computed(() => ({
+// State
+const currentState = ref('default')
+const customText = ref('Click me!')
+const isVisible = ref(true)
+
+// Spring config based on props
+const springConfig = computed(() => ({
   damping: props.damping,
-  stiffness: props.stiffness,
-  restDelta: props.restDelta
+  stiffness: props.stiffness
 }))
 
-// Motion values and springs
+// Motion setup
 const elementRef = ref(null)
 const xPoint = useMotionValue(0)
 const yPoint = useMotionValue(0)
-const x = useSpring(xPoint, spring)
-const y = useSpring(yPoint, spring)
+const x = useSpring(xPoint, springConfig)
+const y = useSpring(yPoint, springConfig)
 
-// Computed styles
-const elementClass = computed(() => {
-  const baseClass = 'pointer-follower'
-  const shapeClass = `shape-${props.shape}`
-  return `${baseClass} ${shapeClass} ${props.class}`.trim()
-})
-
-const customStyle = computed(() => ({
-  width: typeof props.size === 'number' ? `${props.size}px` : props.size,
-  height: typeof props.size === 'number' ? `${props.size}px` : props.size,
-  backgroundColor: props.color
-}))
-
-// Pointer move handler
+// Mouse move handler
 const handlePointerMove = ({ clientX, clientY }) => {
-  if (!props.followMouse) return
-
   const element = elementRef.value?.$el
   if (!element) return
 
   frame.read(() => {
-    // Use viewport coordinates instead of element offset
-    xPoint.set(clientX - element.offsetWidth / 2 + props.offset.x)
-    yPoint.set(clientY - element.offsetHeight / 2 + props.offset.y)
+    xPoint.set(clientX - element.offsetWidth / 2)
+    yPoint.set(clientY - element.offsetHeight / 2)
   })
+}
+
+// Mouse enter handler
+const handleMouseEnter = (event) => {
+  const target = event.target.closest('[data-pointer]')
+  if (!target) return
+
+  const pointerType = target.getAttribute('data-pointer')
+  const pointerText = target.getAttribute('data-pointer-text')
+
+  if (pointerType) {
+    currentState.value = pointerType
+    if (pointerText) {
+      customText.value = pointerText
+    }
+  }
+}
+
+// Mouse leave handler
+const handleMouseLeave = (event) => {
+  const target = event.target.closest('[data-pointer]')
+  if (target) {
+    currentState.value = 'default'
+  }
 }
 
 // Lifecycle
 onMounted(() => {
-  if (props.followMouse) {
-    window.addEventListener("pointermove", handlePointerMove)
-  }
+  window.addEventListener("pointermove", handlePointerMove)
+  document.addEventListener("mouseenter", handleMouseEnter, true)
+  document.addEventListener("mouseleave", handleMouseLeave, true)
 })
 
 onUnmounted(() => {
-  if (props.followMouse) {
-    window.removeEventListener("pointermove", handlePointerMove)
-  }
-})
-
-// Expose methods for manual control
-defineExpose({
-  moveTo: (newX, newY) => {
-    xPoint.set(newX)
-    yPoint.set(newY)
-  },
-  setPosition: (newX, newY) => {
-    xPoint.set(newX)
-    yPoint.set(newY)
-  }
+  window.removeEventListener("pointermove", handlePointerMove)
+  document.removeEventListener("mouseenter", handleMouseEnter, true)
+  document.removeEventListener("mouseleave", handleMouseLeave, true)
 })
 </script>
 
 <style scoped>
 .pointer-follower {
   position: fixed;
-  /* Changed from absolute to fixed */
   top: 0;
   left: 0;
   pointer-events: none;
   z-index: 9999;
+  transition: opacity 0.2s ease;
 }
 
-.shape-circle {
+.pointer-hidden {
+  opacity: 0;
+}
+
+/* Default pointer */
+.pointer-default {
+  width: v-bind('typeof size === "number" ? size + "px" : size');
+  height: v-bind('typeof size === "number" ? size + "px" : size');
+  background: v-bind('color');
+  border-radius: v-bind('shape === "circle" ? "50%" : shape === "rounded" ? "8px" : "0"');
+}
+
+.pointer-button {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.shape-square {
-  border-radius: 0;
+.pointer-link {
+  width: 40px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.shape-rounded {
-  border-radius: 12px;
+.pointer-image {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-.default-follower {
-  width: 100%;
-  height: 100%;
-  background-color: inherit;
-  border-radius: inherit;
+.pointer-text {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 </style>

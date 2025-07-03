@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MotionPointerFollower :size="20" color="#ff0088" :damping="10" :stiffness="100" shape="rounded" />
+    <MotionPointerFollower :size="40" color="#5757573b" :damping="10" :stiffness="100" shape="circle" />
     <TheNavbar />
     <main>
       <!-- Your page content -->
