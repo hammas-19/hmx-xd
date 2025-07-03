@@ -2,7 +2,7 @@
   <motion.div ref="elementRef" class="pointer-follower"
     :class="[`pointer-${currentState}`, { 'pointer-hidden': !isVisible }]" :style="{ x, y }">
     <!-- Default pointer -->
-    <div v-if="currentState === 'default'" class="pointer-default backdrop-blur-[1.5px] border border-bubbles text-[#5757573b]"></div>
+    <div v-if="currentState === 'default'" class="pointer-default backdrop-blur-[1.5px] border border-bubbles" />
 
     <!-- Button pointer -->
     <div v-else-if="currentState === 'button'" class="pointer-button">
@@ -112,17 +112,38 @@ const handleMouseLeave = (event) => {
   }
 }
 
+// Hide/show cursor based on mouse enter/leave window
+const handleMouseEnterWindow = () => {
+  isVisible.value = true
+}
+
+const handleMouseLeaveWindow = () => {
+  isVisible.value = false
+}
+
 // Lifecycle
 onMounted(() => {
+  // Hide default cursor globally
+  document.body.style.cursor = 'none'
+
+  // Add event listeners
   window.addEventListener("pointermove", handlePointerMove)
   document.addEventListener("mouseenter", handleMouseEnter, true)
   document.addEventListener("mouseleave", handleMouseLeave, true)
+  document.addEventListener("mouseenter", handleMouseEnterWindow)
+  document.addEventListener("mouseleave", handleMouseLeaveWindow)
 })
 
 onUnmounted(() => {
+  // Restore default cursor
+  document.body.style.cursor = 'auto'
+
+  // Remove event listeners
   window.removeEventListener("pointermove", handlePointerMove)
   document.removeEventListener("mouseenter", handleMouseEnter, true)
   document.removeEventListener("mouseleave", handleMouseLeave, true)
+  document.removeEventListener("mouseenter", handleMouseEnterWindow)
+  document.removeEventListener("mouseleave", handleMouseLeaveWindow)
 })
 </script>
 
@@ -148,42 +169,46 @@ onUnmounted(() => {
   border-radius: v-bind('shape === "circle" ? "50%" : shape === "rounded" ? "8px" : "0"');
 }
 
+/* Button pointer */
 .pointer-button {
-  width: 50px;
-  height: 50px;
+  width: v-bind('(typeof size === "number" ? size * 2.5 : "50") + "px"');
+  height: v-bind('(typeof size === "number" ? size * 2.5 : "50") + "px"');
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 50%;
+  border-radius: v-bind('shape === "circle" ? "50%" : shape === "rounded" ? "12px" : "0"');
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
 }
 
+/* Link pointer */
 .pointer-link {
-  width: 40px;
-  height: 40px;
+  width: v-bind('(typeof size === "number" ? size * 2 : "40") + "px"');
+  height: v-bind('(typeof size === "number" ? size * 2 : "40") + "px"');
   background: rgba(59, 130, 246, 0.9);
-  border-radius: 50%;
+  border-radius: v-bind('shape === "circle" ? "50%" : shape === "rounded" ? "10px" : "0"');
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
 }
 
+/* Image pointer */
 .pointer-image {
   padding: 8px 16px;
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 20px;
+  border-radius: v-bind('shape === "circle" ? "50px" : shape === "rounded" ? "20px" : "0"');
   color: white;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
 }
 
+/* Text pointer */
 .pointer-text {
   padding: 8px 16px;
   background: rgba(0, 0, 0, 0.9);
-  border-radius: 20px;
+  border-radius: v-bind('shape === "circle" ? "50px" : shape === "rounded" ? "20px" : "0"');
   color: white;
   font-size: 12px;
   font-weight: 600;
