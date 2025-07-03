@@ -3,7 +3,9 @@
     <div class="bg-black bg-opacity-80 backdrop-blur-sm rounded-full px-6 py-3 flex items-center space-x-6 shadow-lg">
       <!-- Sun/Moon Icon -->
       <div class="flex items-center">
-        <img src="/home/signLogo.png" class="w-7 h-fit" alt="Hammas Masood">
+        <NuxtLink to="/">  
+          <img src="/home/signLogo.png" class="w-7 h-fit" alt="Hammas Masood">
+        </NuxtLink>
       </div>
 
       <!-- Navigation Links -->

@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-900 p-8">
     <!-- Add the pointer follower once -->
-    <SimpleCustomPointer />
+    <!-- <SimpleCustomPointer /> -->
 
     <!-- Your content with data attributes -->
     <div class="max-w-4xl mx-auto space-y-12 text-white">
