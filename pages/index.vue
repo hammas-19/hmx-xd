@@ -2,6 +2,6 @@
   <div>
     <HomeHero />
     <HomeLatestWork />
-    <TestComp />
+    <!-- <TestComp /> -->
   </div>
 </template>
