@@ -1,6 +1,6 @@
 <template>
   <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-    <div class="bg-black bg-opacity-80 backdrop-blur-sm rounded-full px-6 py-3 flex items-center space-x-6 shadow-lg">
+    <div class="bg-black bg-opacity-80 backdrop-blur-sm rounded-full md:px-6 px-2 md:py-3 py-1.5 flex items-center space-x-6 shadow-lg">
       <!-- Sun/Moon Icon -->
       <div class="flex items-center">
         <NuxtLink to="/">  

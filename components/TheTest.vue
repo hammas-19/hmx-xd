@@ -10,9 +10,9 @@
       <div v-for="(project, index) in props.projects" :key="index" class="flex justify-center items-center">
         <Motion :initial="{ scale: 1, x: 0, y: 0 }" :animate="isModalOpen && selectedProject?.name === project.name ? {
           scale: 0.3,
-          x: 0,
-          y: -windowSize.height * 0.49,
-          zIndex: 70
+          x: windowSize.width ? -windowSize.width * 0.35 : -400,
+          y: windowSize.height ? -windowSize.height * 0.35 : -300,
+          zIndex: 60
         } : { scale: 1, x: 0, y: 0, zIndex: 1 }" :transition="{ duration: 0.6, ease: 'easeInOut' }" class="w-full">
           <div class="border-4 md:rounded-[50px] rounded-[35px] border-black w-full top-conic overflow-hidden">
             <div class="py-10 px-5">
@@ -35,18 +35,19 @@
               </div>
             </div>
 
-            <!-- Folder - Keep design but hide content when modal is open -->
-            <div class="flex flex-col md:rounded-[40px] rounded-[20px] overflow-hidden w-full">
-              <div class="flex w-[45%] md:w-[30%] min-h-[40px]">
-                <div class="w-3/2 min-h-full bg-boss mb-[-1px] rounded-tr-sm" />
-                <div class="1/3 theCurve w-[70px] bg-boss min-h-full md:ml-[1-px] ml-[-2px] mb-[-1px]" />
-              </div>
-              <!-- Dynamic Data - Hide content but keep structure when modal is open -->
-              <div
-                class="md:min-h-[300px] bg-boss md:rounded-tr-[40px] rounded-tr-[20px] flex flex-col justify-end p-5 md:gap-10 gap-5">
-                <Motion :initial="{ opacity: 1 }"
-                  :animate="isModalOpen && selectedProject?.name === project.name ? { opacity: 0 } : { opacity: 1 }"
-                  :transition="{ duration: 0.3, ease: 'easeInOut' }">
+            <!-- Folder - Hidden when modal is open for this project -->
+            <Motion :initial="{ opacity: 1, height: 'auto' }" :animate="isModalOpen && selectedProject?.name === project.name ? {
+              opacity: 0,
+              height: 0
+            } : { opacity: 1, height: 'auto' }" :transition="{ duration: 0.4, ease: 'easeInOut' }">
+              <div class="flex flex-col md:rounded-[40px] rounded-[20px] overflow-hidden w-full">
+                <div class="flex w-[45%] md:w-[30%] min-h-[40px]">
+                  <div class="w-3/2 min-h-full bg-boss mb-[-1px] rounded-tr-sm" />
+                  <div class="1/3 theCurve w-[70px] bg-boss min-h-full md:ml-[1-px] ml-[-2px] mb-[-1px]" />
+                </div>
+                <!-- Dynamic Data -->
+                <div
+                  class="md:min-h-[300px] bg-boss md:rounded-tr-[40px] rounded-tr-[20px] flex flex-col justify-end p-5 md:gap-10 gap-5">
                   <p class="text-white md:text-xl font-medium">
                     {{ project.description }}
                   </p>
@@ -92,9 +93,9 @@
                         class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
                     </div>
                   </div>
-                </Motion>
+                </div>
               </div>
-            </div>
+            </Motion>
           </div>
         </Motion>
       </div>
@@ -109,9 +110,6 @@
           <Motion :initial="{ scale: 0.8, opacity: 0 }" :animate="{ scale: 1, opacity: 1 }"
             :exit="{ scale: 0.8, opacity: 0 }" :transition="{ duration: 0.6, ease: 'easeInOut', delay: 0.2 }"
             class="relative w-full h-full bg-white overflow-hidden" @click.stop>
-            <!-- Mini Project Card in Modal (Top Left) - REMOVED -->
-            <!-- The original card now stays visible at top-left instead -->
-
             <!-- Close Button -->
             <Motion :initial="{ opacity: 0, rotate: -90 }" :animate="{ opacity: 1, rotate: 0 }"
               :transition="{ duration: 0.4, delay: 0.5 }" class="absolute top-6 right-6 z-10">
@@ -124,7 +122,7 @@
             </Motion>
 
             <!-- Scrollable Content -->
-            <div class="h-full overflow-y-auto mt-20">
+            <div class="h-full overflow-y-auto">
               <Motion :initial="{ y: 50, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
                 :transition="{ duration: 0.6, delay: 0.4 }" class="p-8 md:p-12 lg:p-16">
                 <!-- Modal Header -->

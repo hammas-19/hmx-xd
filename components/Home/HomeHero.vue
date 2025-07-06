@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen top-conic">
-    <div class="h-full flex flexcol justify-center xl:gap-5 items-end">
+    <div class="h-full flex flex-col sm:flex-row justify-center xl:gap-5 sm:items-end">
       <h1
         class="leading-35 xl:text-[200px] lg:text-[140px] md:text-[100px] text-[50px] text-boss font-sans font-medium">
         Hammas</h1>
