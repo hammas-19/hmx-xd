@@ -10,16 +10,16 @@
 
       <!-- Navigation Links -->
       <div class="flex items-center space-x-6 font-doto font-semibold ">
-        <a href="#work" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
+        <a data-pointer="link" href="#work" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
           Work
         </a>
-        <a href="#story" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
+        <a data-pointer="link" href="#story" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
           Story
         </a>
-        <a href="#process" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
+        <a data-pointer="link" href="#process" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
           Process
         </a>
-        <a href="#chat" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
+        <a data-pointer="link" href="#chat" class="text-bubbles hover:text-white transition-colors duration-200 text-sm">
           Chat
         </a>
       </div>

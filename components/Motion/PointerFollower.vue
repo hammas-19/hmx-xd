@@ -14,9 +14,13 @@
 
     <!-- Link pointer -->
     <div v-else-if="currentState === 'link'" class="pointer-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-      </svg>
+      <Icon name="pixelarticons:arrow-right" class="min-h-10 min-w-10 text-boss" />
+    </div>
+    <div v-else-if="currentState === 'open'" class="pointer-link">
+      <Icon name="pixelarticons:scale" class="min-h-10 min-w-10 text-boss" />
+    </div>
+    <div v-else-if="currentState === 'close'" class="pointer-link">
+      <Icon name="pixelarticons:viewport-narrow" class="min-h-10 min-w-10 text-boss" />
     </div>
 
     <!-- Image pointer -->
@@ -64,6 +68,7 @@ const props = defineProps({
 const currentState = ref('default')
 const customText = ref('Click me!')
 const isVisible = ref(true)
+const currentHoveredElement = ref(null)
 
 // Spring config based on props
 const springConfig = computed(() => ({
@@ -94,6 +99,10 @@ const handleMouseEnter = (event) => {
   const target = event.target.closest('[data-pointer]')
   if (!target) return
 
+  // If we're already on this element, don't change
+  if (currentHoveredElement.value === target) return
+
+  currentHoveredElement.value = target
   const pointerType = target.getAttribute('data-pointer')
   const pointerText = target.getAttribute('data-pointer-text')
 
@@ -108,7 +117,28 @@ const handleMouseEnter = (event) => {
 // Mouse leave handler
 const handleMouseLeave = (event) => {
   const target = event.target.closest('[data-pointer]')
-  if (target) {
+  if (!target) return
+
+  // Only reset if we're leaving the currently tracked element
+  if (currentHoveredElement.value === target) {
+    // Check if we're moving to a descendant
+    const relatedTarget = event.relatedTarget
+    if (relatedTarget && target.contains(relatedTarget)) {
+      return // Don't reset if moving to a child element
+    }
+
+    currentHoveredElement.value = null
+    currentState.value = 'default'
+  }
+}
+
+// Global mouse move to handle edge cases
+const handleGlobalMouseMove = (event) => {
+  const target = event.target.closest('[data-pointer]')
+
+  // If we're not over any pointer element, reset
+  if (!target && currentHoveredElement.value) {
+    currentHoveredElement.value = null
     currentState.value = 'default'
   }
 }
@@ -116,12 +146,14 @@ const handleMouseLeave = (event) => {
 // Lifecycle
 onMounted(() => {
   window.addEventListener("pointermove", handlePointerMove)
+  window.addEventListener("mousemove", handleGlobalMouseMove)
   document.addEventListener("mouseenter", handleMouseEnter, true)
   document.addEventListener("mouseleave", handleMouseLeave, true)
 })
 
 onUnmounted(() => {
   window.removeEventListener("pointermove", handlePointerMove)
+  window.removeEventListener("mousemove", handleGlobalMouseMove)
   document.removeEventListener("mouseenter", handleMouseEnter, true)
   document.removeEventListener("mouseleave", handleMouseLeave, true)
 })
@@ -161,10 +193,11 @@ onUnmounted(() => {
 }
 
 .pointer-link {
-  width: 40px;
-  height: 40px;
-  background: rgba(59, 130, 246, 0.9);
+  width: 60px;
+  height: 60px;
+  background: rgb(244, 244, 244);
   border-radius: 50%;
+  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
