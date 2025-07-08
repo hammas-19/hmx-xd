@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-conic def-padding-full">
+  <div class=" def-padding-full">
     <div class="mt-40 md:mb-20 mb-14 w-fit mx-auto flex flex-col">
       <small class="self-end font-doto text-2xl font-bold">
         <MotionAnimatedText text="til today!" animation="fadeIn" stagger />
@@ -9,18 +9,17 @@
       </h2>
     </div>
     <div class="def-container space-y-40">
-      <Motion v-for="(project, index) in props.projects" :key="index" :initial="{ opacity: 0, y: 100, rotate: -5 }"
-        :while-in-view="{ opacity: 1, y: 0, rotate: 0 }" :transition="{
+      <Motion v-for="(project, index) in props.projects" :key="index" :initial="{ opacity: 0, y: 100 }"
+        :while-in-view="{ opacity: 1, y: 0 }" :transition="{
           duration: 0.5,
           delay: index * 0.1,
           ease: 'backOut'
         }" :while-hover="{
         y: -10,
         scale: 1.02,
-        rotate: 1
       }" :while-tap="{ scale: 0.98 }" :viewport="{ once: true }" class="flex justify-center items-center">
-        <div class="w-full">
-          <div class="w-full h-full absolute inset-0 top-conic" />
+        <div class="w-full relative">
+          <div class="w-full h-full absolute inset-0 top-conic md:rounded-[50px] rounded-[35px]" />
           <div
             class="border-4 md:rounded-[50px] rounded-[35px] border-black w-full bg-[#ffffff] hover:bg-transparent  backdrop-blur-sm overflow-hidden">
             <div class="py-10 px-5">

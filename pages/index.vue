@@ -2,6 +2,8 @@
   <div>
     <HomeHero />
     <HomeLatestWork :projects="projects" />
+    <HomeAbout />
+    <HomeConnectBtn />
     <!-- <TestComp /> -->
   </div>
 </template>
