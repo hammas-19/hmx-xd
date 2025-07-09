@@ -1,627 +1,541 @@
-
 <template>
-  <label class="wrap" for="button">
-    <input id="button" type="checkbox" aria-label="Bluetooth" >
+  <div class="def-container flex justify-center items-center">
+
     <button class="button">
-      <div class="corner"/>
-      <div class="inner">
-       Connect
+      <div class="bg"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 342 208" height="208" width="342" class="splash">
+        <path stroke-linecap="round" stroke-width="3"
+          d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362">
+        </path>
+        <path stroke-linecap="round" stroke-width="3"
+          d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M281.133 64.9917C281.133 64.9917 287.96 49.8089 302.934 48.2295C317.908 46.6501 319.712 36.5272 319.712 36.5272">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M281.133 138.984C281.133 138.984 287.96 154.167 302.934 155.746C317.908 157.326 319.712 167.449 319.712 167.449">
+        </path>
+        <path stroke-linecap="round" stroke-width="3"
+          d="M230.578 57.4476C230.578 57.4476 225.785 41.5051 236.061 30.4998C246.337 19.4945 244.686 12.9998 244.686 12.9998">
+        </path>
+        <path stroke-linecap="round" stroke-width="3"
+          d="M230.578 150.528C230.578 150.528 225.785 166.471 236.061 177.476C246.337 188.481 244.686 194.976 244.686 194.976">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M170.392 57.0278C170.392 57.0278 173.89 42.1322 169.571 29.54C165.252 16.9478 168.751 2.05227 168.751 2.05227">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M170.392 150.948C170.392 150.948 173.89 165.844 169.571 178.436C165.252 191.028 168.751 205.924 168.751 205.924">
+        </path>
+        <path stroke-linecap="round" stroke-width="3"
+          d="M112.609 57.4476C112.609 57.4476 117.401 41.5051 107.125 30.4998C96.8492 19.4945 98.5 12.9998 98.5 12.9998">
+        </path>
+        <path stroke-linecap="round" stroke-width="3"
+          d="M112.609 150.528C112.609 150.528 117.401 166.471 107.125 177.476C96.8492 188.481 98.5 194.976 98.5 194.976">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M62.2941 64.9917C62.2941 64.9917 55.4671 49.8089 40.4932 48.2295C25.5194 46.6501 23.7159 36.5272 23.7159 36.5272">
+        </path>
+        <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3"
+          d="M62.2941 145.984C62.2941 145.984 55.4671 161.167 40.4932 162.746C25.5194 164.326 23.7159 174.449 23.7159 174.449">
+        </path>
+      </svg>
+
+      <div class="wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 221 42" height="42" width="221" class="path">
+          <path stroke-linecap="round" stroke-width="3"
+            d="M182.674 2H203C211.837 2 219 9.16344 219 18V24C219 32.8366 211.837 40 203 40H18C9.16345 40 2 32.8366 2 24V18C2 9.16344 9.16344 2 18 2H47.8855">
+          </path>
+        </svg>
+
+        <div class="outline"></div>
+        <div class="content">
+          <span class="char state-1">
+            <span data-label="L" style="--i: 1">L</span>
+            <span data-label="e" style="--i: 2">e</span>
+            <span data-label="t" style="--i: 3">t</span>
+            <span data-label="' " style="--i: 4">'</span>
+            <span data-label="s" style="--i: 5">s</span>
+            <span data-label=" " style="--i: 6"> </span>
+            <span data-label="T" style="--i: 7">T</span>
+            <span data-label="a" style="--i: 8">a</span>
+            <span data-label="l" style="--i: 9">l</span>
+            <span data-label="k" style="--i: 10">k</span>
+          </span>
+
+          <div class="icon">
+            <div></div>
+          </div>
+
+          <span class="char state-2">
+            <span data-label="L" style="--i: 1">L</span>
+            <span data-label="e" style="--i: 2">e</span>
+            <span data-label="t" style="--i: 3">t</span>
+            <span data-label="' " style="--i: 4">'</span>
+            <span data-label="s" style="--i: 5">s</span>
+            <span data-label=" " style="--i: 6"> </span>
+            <span data-label="T" style="--i: 7">T</span>
+            <span data-label="a" style="--i: 8">a</span>
+            <span data-label="l" style="--i: 9">l</span>
+            <span data-label="k" style="--i: 10">k</span>
+          </span>
+        </div>
       </div>
     </button>
-    <div class="led"/>
-    <div class="bg">
-      <div class="shine-1"/>
-      <div class="shine-2"/>
-    </div>
-    <div class="bg-glow"/>
-  </label>
-
-  <div class="noise">
-    <svg width="100%" height="100%">
-      <defs>
-        <pattern id="noise-pattern" patternUnits="userSpaceOnUse" width="500" height="500">
-          <filter id="noise" x="0" y="0">
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-            <feBlend mode="screen"/>
-          </filter>
-          <rect width="500" height="500" filter="url(#noise)"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#noise-pattern)"/>
-    </svg>
   </div>
+
 </template>
 <style scoped>
-.wrap {
-  --radius: 30px;
-  --bg: #2c3238;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  pointer-events: none;
-}
-
-.wrap::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 300px;
-  border-radius: 59px;
-  background-color: rgba(255, 255, 255, 0.05);
-  filter: blur(60px);
-  transform: skewY(-20deg);
-}
-
-.wrap::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
-  background-color: rgba(9, 7, 7, 0.1);
-  filter: blur(30px);
-}
-
-.wrap input {
-  position: absolute;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  inset: 9;
-  z-index: 999;
-  cursor: pointer;
-  pointer-events: all;
-  user-select: none;
-}
-
 .button {
-  position: relative;
-  overflow: hidden;
-  width: 154px;
-  height: 99px;
-  background-color: var(--bg);
-  z-index: 2;
-  border: transparent;
+  --white: #e6eded;
+    /* Adjusted from the light gray color you provided */
+    --purple-100: #bfdef9;
+    /* Adjusted from the light blue color you provided */
+    --purple-200: #aacdf6;
+    /* Slightly darker shade of light blue */
+    --purple-300: #8ac4f2;
+    /* A bit darker shade of light blue */
+    --purple-400: #5fa8e0;
+    /* Darker shade of light blue */
+    --purple-500: #4682b4;
+  --radius: 18px;
+
   border-radius: var(--radius);
-  box-shadow:
-    inset 0 1px 1px rgb(255 255 255 / 40%),
-    inset 0 -6px 1px -4px #0084ff,
-    inset 0 -15px 6px -8px #003cff;
-  transition: all 0.3s ease;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: calc(var(--radius) * 0.8);
-  border-top: 50px solid #414244;
-  border-left: 40px solid #2b2b2c;
-  border-right: 40px solid #2b2b2c;
-  border-bottom: 50px solid #15161a;
-  filter: blur(6px);
-  transition: all 0.5s ease;
-}
-
-.button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 101%;
-  height: 50px;
-  width: 120px;
-  border-radius: 50px 50px 0 0;
-  background: #009cff;
-  filter: contrast(10) blur(7px);
-  transition: all 0.3s ease;
-  opacity: 1;
-}
-
-.button .corner {
-  transition: all 0.4s ease;
-  opacity: 0.1;
-}
-
-.button .corner::before,
-.button .corner::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  border-top: 55px solid white;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  filter: blur(6px);
-}
-
-.button .corner::before {
-  left: 8px;
-  transform: rotate(-40deg);
-}
-
-.button .corner::after {
-  right: 8px;
-  transform: rotate(40deg);
-}
-
-.wrap input:hover+.button .corner {
-  opacity: 0.15;
-}
-
-.button .inner {
-  z-index: 9;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inset: 22px 20px;
-  border-radius: calc(var(--radius) * 0.85);
-  background: linear-gradient(180deg, #232324 5%, #46484b 100%);
-  transition: all 0.3s ease;
-  box-shadow:
-    inset 0 -5px 15px -1px rgba(0, 0, 0, 0.3),
-    inset 0 -4px 3px -3px black,
-    inset 0 -10px 20px -8px rgb(255 255 255 / 40%),
-    inset 0 1px 0 1px rgb(255 255 255 / 20%);
-}
-
-.button .inner svg {
-  display: block;
-  overflow: visible;
-  height: 45%;
-}
-
-.button .inner svg .symbol {
-  fill: #212123;
-}
-
-.button .inner svg .symbol-path {
-  filter: brightness(1.1) contrast(1.1);
-}
-
-.button .inner svg .symbol-path path {
-  stroke-dasharray: 650;
-  stroke-dashoffset: -650;
-  stroke-width: 5;
-  stroke: #3c69ff;
-  animation: symbolPath 2s ease-in-out;
-}
-
-.button .inner svg .symbol-path-glow path {
-  stroke-dasharray: 650;
-  stroke-dashoffset: -650;
-  stroke-width: 30;
-  stroke: #0231ce;
-  filter: blur(30px);
-  animation: symbolPath 2s ease-in-out;
-}
-
-.button .inner svg .symbol-path circle {
-  fill: #3c69ff;
-  opacity: 0;
-  animation: symbolCircle 2s ease-in-out;
-}
-
-.button .inner svg .symbol-path-glow circle {
-  fill: #0231ce;
-  filter: blur(30px);
-  opacity: 0;
-  animation: symbolCircle 2s ease-in-out;
+  outline: none;
+  cursor: pointer;
+  font-size: 23px;
+  font-family: Arial;
+  background: transparent;
+  letter-spacing: -1px;
+  border: 0;
+  position: relative;
+  width: 220px;
+  height: 80px;
+  transform: rotate(353deg) skewX(4deg);
 }
 
 .bg {
-  background-color: black;
   position: absolute;
-  inset: -7px;
-  border-radius: calc(var(--radius) * 1.25);
-  box-shadow: 0 20px 10px -10px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+  filter: blur(1px);
+}
+
+.bg::before,
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--radius) * 1.1);
+  background: var(--purple-500);
 }
 
 .bg::before {
-  content: "";
-  position: absolute;
-  border-radius: inherit;
-  box-shadow:
-    inset 0 -2px 0px -1px rgb(120 176 255 / 32%),
-    inset 0 0 5px 1px black,
-    inset 0 0 0 1px black;
-  inset: 0;
-  z-index: 1;
-}
-
-.bg .shine-1,
-.bg .shine-2::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
+  filter: blur(5px);
   transition: all 0.3s ease;
-  background: rgba(0, 60, 255, 1);
-  width: 10px;
-  height: 10px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  border-radius: 50%;
-  filter: blur(2px);
-  transform: translateY(0) scale(0);
-  animation: bg 2.4s linear 0.3s;
+  box-shadow:
+    -7px 6px 0 0 rgb(115 75 155 / 40%),
+    -14px 12px 0 0 rgb(115 75 155 / 30%),
+    -21px 18px 4px 0 rgb(115 75 155 / 25%),
+    -28px 24px 8px 0 rgb(115 75 155 / 15%),
+    -35px 30px 12px 0 rgb(115 75 155 / 12%),
+    -42px 36px 16px 0 rgb(115 75 155 / 8%),
+    -56px 42px 20px 0 rgb(115 75 155 / 5%);
 }
 
-.bg .shine-2::before {
-  animation: bg 9.4s linear infinite;
+.wrap {
+  border-radius: inherit;
+  overflow: hidden;
+  height: 100%;
+  transform: translate(6px, -6px);
+  padding: 3px;
+  background: linear-gradient(to bottom,
+      var(--purple-100) 0%,
+      var(--purple-400) 100%);
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.bg .shine-2 {
-  transition: all 0h linear;
+.outline {
+  position: absolute;
+  overflow: hidden;
+  inset: 0;
   opacity: 0;
+  outline: none;
+  border-radius: inherit;
+  transition: all 0.4s ease;
 }
 
-.led {
+.outline::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  width: 120px;
+  height: 300px;
+  margin: auto;
+  background: linear-gradient(to right,
+      transparent 0%,
+      white 50%,
+      transparent 100%);
+  animation: spin 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.content {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  position: relative;
+  height: 100%;
+  gap: 16px;
+  border-radius: calc(var(--radius) * 0.85);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom,
+      var(--purple-300) 0%,
+      var(--purple-400) 100%);
+  box-shadow:
+    inset -2px 12px 11px -5px var(--purple-200),
+    inset 1px -3px 11px 0px rgb(0 0 0 / 35%);
+}
+
+.content::before {
+  content: "";
+  inset: 0;
   position: absolute;
   z-index: 10;
-  top: 100%;
-  border-radius: 50%;
-  width: 6px;
-  height: 6px;
-  margin-top: 22px;
-  transition: all 0.3s ease;
-  background-color: #3aeaf3;
-  box-shadow:
-    0 -10px 35px 17px #003cff,
-    inset 0 1px 2px 0px rgba(255, 255, 255, 0.6),
-    0 0 0px 3px rgb(0 0 0 / 60%),
-    0 0 2px 4px rgb(0 79 152 / 80%);
+  width: 80%;
+  top: 45%;
+  bottom: 35%;
+  opacity: 0.7;
+  margin: auto;
+  background: linear-gradient(to bottom, transparent, var(--purple-400));
+  filter: brightness(1.3) blur(5px);
 }
 
-.noise {
+.char {
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char span {
+  display: block;
+  color: transparent;
+  position: relative;
+}
+
+.char span:nth-child(5) {
+  margin-left: 5px;
+}
+
+.char.state-1 span:nth-child(5) {
+  margin-right: -3px;
+}
+
+.char.state-1 span {
+  animation: charAppear 1.2s ease backwards calc(var(--i) * 0.03s);
+}
+
+.char.state-1 span::before,
+.char span::after {
+  content: attr(data-label);
   position: absolute;
-  top: -20px;
-  bottom: -20px;
+  color: var(--white);
+  text-shadow: -1px 1px 2px var(--purple-500);
+  left: 0;
+}
+
+.char span::before {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.char.state-2 {
+  position: absolute;
+  left: 80px;
+}
+
+.char.state-2 span::after {
+  opacity: 1;
+}
+
+.icon {
+  animation: resetArrow 0.8s cubic-bezier(0.7, -0.5, 0.3, 1.2) forwards;
+  z-index: 10;
+}
+
+.icon div,
+.icon div::before,
+.icon div::after {
+  height: 3px;
+  border-radius: 1px;
+  background-color: var(--white);
+}
+
+.icon div::before,
+.icon div::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  transform-origin: center right;
+  width: 14px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.icon div {
+  position: relative;
+  width: 24px;
+  box-shadow: -2px 2px 5px var(--purple-400);
+  transform: scale(0.9);
+  background: linear-gradient(to bottom, var(--white), var(--purple-100));
+  animation: swingArrow 1s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.icon div::before {
+  transform: rotate(44deg);
+  top: 1px;
+  box-shadow: 1px -2px 3px -1px var(--purple-400);
+  animation: rotateArrowLine 1s linear infinite;
+  animation-play-state: paused;
+}
+
+.icon div::after {
+  bottom: 1px;
+  transform: rotate(316deg);
+  box-shadow: -2px 2px 3px 0 var(--purple-400);
+  background: linear-gradient(200deg, var(--white), var(--purple-100));
+  animation: rotateArrowLine2 1s linear infinite;
+  animation-play-state: paused;
+}
+
+.path {
+  position: absolute;
+  z-index: 12;
+  bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0.08;
-  mask-image: linear-gradient(transparent 5%,
-      white 30%,
-      white 70%,
-      transparent 95%);
-  filter: grayscale(1);
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  pointer-events: none;
+}
+
+.splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  stroke-dasharray: 60 60;
+  stroke-dashoffset: 60;
+  transform: translate(-17%, -31%);
+  stroke: var(--purple-300);
 }
 
 /** STATES */
 
-.wrap input:active+.button .inner svg .symbol-path path,
-.wrap input:active+.button .inner svg .symbol-path-glow path,
-.wrap input:active+.button .inner svg .symbol-path circle,
-.wrap input:active+.button .inner svg .symbol-path-glow circle,
-.wrap input:active+.button~.bg .shine-1 {
-  animation: none;
-}
-
-.wrap input:checked+.button .inner svg .symbol-path path,
-.wrap input:checked+.button .inner svg .symbol-path-glow path {
-  animation: symbolPath2 2s ease-in-out reverse;
-}
-
-.wrap input:checked+.button .inner svg .symbol-path path {
-  stroke: #b48518;
-}
-
-.wrap input:checked+.button .inner svg .symbol-path-glow path {
-  stroke: #714b00;
-}
-
-.wrap input:checked+.button .inner svg .symbol-path circle {
-  fill: #b48518;
-}
-
-.wrap input:checked+.button .inner svg .symbol-path-glow circle {
-  fill: #714b00;
-}
-
-.wrap input:hover+.button {
-  transform: scale(1.02);
-}
-
-.wrap input:active+.button {
-  transform: scale(0.97);
-  filter: contrast(1.07);
-  background-color: transparent;
-}
-
-.wrap input:active+.button::before {
-  box-shadow: 0 -10px 10px 10px black;
-}
-
-.wrap input:active+.button .inner {
-  background: linear-gradient(180deg, #232324 5%, #3b3d40 100%);
-  box-shadow:
-    inset 0 -5px 15px -1px rgba(0, 0, 0, 0.3),
-    inset 0 -4px 3px -3px black,
-    inset 0 -10px 20px -8px rgb(255 255 255 / 20%),
-    inset 0 1px 0 1px rgb(255 255 255 / 10%);
-  transform: scale(0.95);
-}
-
-.wrap input:checked+.button~.bg .shine-1 {
-  background-color: rgba(255, 187, 0, 0.7);
-}
-
-.wrap input:not(:checked):hover+.button~.bg .shine-2 {
+.button .words {
   opacity: 1;
 }
 
-.wrap input:active+.button .corner,
-.wrap input:active+.button~.bg-glow,
-.wrap input:not(:checked):active+.button~.bg .shine-2 {
+.button .words span {
+  animation-play-state: running;
+}
+
+.button .char.state-1 span::before {
+  animation: charAppear 0.7s ease calc(var(--i) * 0.03s);
+}
+
+.button .char.state-1 span::after {
+  opacity: 1;
+  animation: charDisappear 0.7s ease calc(var(--i) * 0.03s);
+}
+
+.button .wrap {
+  transform: translate(8px, -8px);
+}
+
+.button .outline {
+  opacity: 1;
+}
+
+.button .outline::before,
+.button .icon div::before,
+.button .icon div::after,
+.button .icon div {
+  animation-play-state: running;
+}
+
+.button:active .bg::before {
+  filter: blur(5px);
+  opacity: 0.7;
+  box-shadow:
+    -7px 6px 0 0 rgb(115 75 155 / 40%),
+    -14px 12px 0 0 rgb(115 75 155 / 25%),
+    -21px 18px 4px 0 rgb(115 75 155 / 15%);
+}
+
+.button:active .content {
+  box-shadow:
+    inset -1px 12px 8px -5px rgba(71, 0, 137, 0.4),
+    inset 0px -3px 8px 0px var(--purple-200);
+}
+
+.button:active .words,
+.button:active .outline {
   opacity: 0;
 }
 
-.bg-glow {
-  transition: all 0.5s linear;
+.button:active .wrap {
+  transform: translate(3px, -3px);
 }
 
-.bg-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 30px;
-  background: linear-gradient(to bottom, #984fff 0%, black 100%);
-  filter: blur(12px);
-  opacity: 0;
-  animation: bgGlow 3s linear backwards;
+.button:active .splash {
+  animation: splash 0.8s cubic-bezier(0.3, 0, 0, 1) forwards 0.05s;
 }
 
-@keyframes bgGlow {
+.button:focus .path {
+  animation: path 1.6s ease forwards 0.2s;
+}
+
+.button:focus .icon {
+  animation: arrow 1s cubic-bezier(0.7, -0.5, 0.3, 1.5) forwards;
+}
+
+.char.state-2 span::after,
+.button:focus .char.state-1 span {
+  animation: charDisappear 0.5s ease forwards calc(var(--i) * 0.03s);
+}
+
+.button:focus .char.state-2 span::after {
+  animation: charAppear 1s ease backwards calc(var(--i) * 0.03s);
+}
+
+@keyframes spin {
   0% {
-    opacity: 0;
+    transform: rotate(0deg);
   }
 
-  40% {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes charAppear {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+    filter: blur(20px);
+  }
+
+  20% {
+    transform: translateY(70%);
     opacity: 1;
   }
 
-  80%,
+  50% {
+    transform: translateY(-15%);
+    opacity: 1;
+    filter: blur(0);
+  }
+
   100% {
-    opacity: 0;
-  }
-}
-
-.wrap input:checked+.button~.bg-glow::before {
-  background: linear-gradient(to bottom, #ff2200 0%, black 100%);
-  animation: bgGlow2 3s linear backwards;
-}
-
-@keyframes bgGlow2 {
-  0% {
-    opacity: 0;
-  }
-
-  40% {
+    transform: translateY(0);
     opacity: 1;
   }
-
-  70%,
-  100% {
-    opacity: 0;
-  }
 }
 
-.wrap input:checked+.button~.led {
-  animation: ledTurnOff 3s linear forwards;
-}
-
-@keyframes ledTurnOff {
-
-  30%,
-  60% {
-    background-color: #ffdf4e;
-    box-shadow:
-      0 -10px 35px 17px rgba(255, 200, 0, 0.6),
-      inset 0 1px 2px 0px white,
-      0 0 0px 3px rgb(0 0 0 / 60%),
-      0 0 2px 4px rgba(152, 119, 0, 0.3);
-  }
-
-  60.1%,
-  65% {
-    background-color: black;
-    box-shadow:
-      0 -10px 35px 17px transparent,
-      inset 0 1px 2px 0px transparent,
-      0 0 0px 3px rgb(0 0 0 / 10%),
-      0 0 2px 4px transparent;
-  }
-
-  65.1%,
-  70% {
-    background-color: #ffdf4e;
-    box-shadow:
-      0 -10px 35px 17px rgba(255, 200, 0, 0.6),
-      inset 0 1px 2px 0px white,
-      0 0 0px 3px rgb(0 0 0 / 60%),
-      0 0 2px 4px rgba(152, 119, 0, 0.3);
-  }
-
-  70.1%,
-  100% {
-    background-color: black;
-    box-shadow:
-      0 -10px 35px 17px transparent,
-      inset 0 1px 2px 0px transparent,
-      0 0 0px 3px rgb(0 0 0 / 10%),
-      0 0 2px 4px transparent;
-  }
-}
-
-.wrap input:checked+.button {
-  animation: reflexLedTurnOff 3s linear forwards;
-}
-
-@keyframes reflexLedTurnOff {
-
-  30%,
-  60% {
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.4),
-      inset 0 -6px 1px -4px #9b8100,
-      inset 0 -15px 6px -8px #373326;
-  }
-
-  60.1%,
-  65% {
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.4),
-      inset 0 -6px 1px -4px rgba(255, 255, 255, 0.1),
-      inset 0 -15px 6px -8px rgba(255, 255, 255, 0.1);
-  }
-
-  65.1%,
-  70% {
-    box-shadow:
-      inset 0 1px 1px rgb(255 255 255 / 40%),
-      inset 0 -6px 1px -4px #9b8100,
-      inset 0 -15px 6px -8px #373326;
-  }
-
-  70.1%,
-  100% {
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.4),
-      inset 0 -6px 1px -4px rgba(255, 255, 255, 0.1),
-      inset 0 -15px 6px -8px rgba(255, 255, 255, 0.1);
-  }
-}
-
-.wrap input:checked+.button::after {
-  animation: reflexLedBlurTurnOff 3s linear forwards;
-}
-
-@keyframes reflexLedBlurTurnOff {
-
-  30%,
-  60% {
-    background: #ffc400;
-  }
-
-  60.1%,
-  65% {
-    background: transparent;
-  }
-
-  65.1%,
-  70% {
-    background: #ffc400;
-  }
-
-  70.1%,
-  100% {
-    background: transparent;
-  }
-}
-
-.wrap input:checked+.button~.bg::before {
-  animation: bgBeforeTurnOff 3s linear forwards;
-}
-
-@keyframes bgBeforeTurnOff {
-
-  30%,
-  60% {
-    box-shadow:
-      inset 0 -2px 0px -1px rgba(255, 230, 120, 0.3),
-      inset 0 0 5px 1px black,
-      inset 0 0 0 1px black;
-  }
-
-  60.1%,
-  65% {
-    box-shadow:
-      inset 0 -2px 0px -1px rgba(160, 160, 160, 0.3),
-      inset 0 0 5px 1px black,
-      inset 0 0 0 1px black;
-  }
-
-  65.1%,
-  70% {
-    box-shadow:
-      inset 0 -2px 0px -1px rgba(255, 230, 120, 0.3),
-      inset 0 0 5px 1px black,
-      inset 0 0 0 1px black;
-  }
-
-  70.1%,
-  100% {
-    box-shadow:
-      inset 0 -2px 0px -1px rgba(160, 160, 160, 0.3),
-      inset 0 0 5px 1px black,
-      inset 0 0 0 1px black;
-  }
-}
-
-@keyframes bg {
+@keyframes charDisappear {
   0% {
-    transform: translateY(0) scale(0);
-  }
-
-  12% {
-    transform: translateY(0) scale(25);
-  }
-
-  60%,
-  100% {
-    transform: translateY(-280px) scale(20, 18);
-  }
-}
-
-@keyframes symbolPath {
-  0% {
-    stroke-dashoffset: -650;
-  }
-
-  50% {
-    stroke-dashoffset: 0;
-  }
-
-  100% {
-    stroke-dashoffset: 650;
-  }
-}
-
-@keyframes symbolPath2 {
-  0% {
-    stroke-dashoffset: -650;
-  }
-
-  50% {
-    stroke-dashoffset: 0;
-  }
-
-  100% {
-    stroke-dashoffset: 650;
-  }
-}
-
-@keyframes symbolCircle {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
+    transform: translateY(0);
     opacity: 1;
   }
 
   100% {
+    transform: translateY(-70%);
     opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+
+  51% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-128px);
+    opacity: 1;
+  }
+}
+
+@keyframes swingArrow {
+  50% {
+    transform: translateX(5px) scale(0.9);
+  }
+}
+
+@keyframes rotateArrowLine {
+  50% {
+    transform: rotate(30deg);
+  }
+
+  80% {
+    transform: rotate(55deg);
+  }
+}
+
+@keyframes rotateArrowLine2 {
+  50% {
+    transform: rotate(330deg);
+  }
+
+  80% {
+    transform: rotate(300deg);
+  }
+}
+
+@keyframes resetArrow {
+  0% {
+    transform: translateX(-128px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes path {
+  from {
+    stroke: white;
+  }
+
+  to {
+    stroke-dashoffset: -480;
+    stroke: #f9c6fe;
+  }
+}
+
+@keyframes splash {
+  to {
+    stroke-dasharray: 2 60;
+    stroke-dashoffset: -60;
   }
 }
 </style>
-
 
