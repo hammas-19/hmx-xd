@@ -2,17 +2,17 @@
   <div>
     <TheNavbar>
       <template #work>
-        <NuxtLink to="#work">
+        <NuxtLink data-pointer="link" to="#work">
           Work
         </NuxtLink>
       </template>
       <template #about>
-        <NuxtLink to="#about">
+        <NuxtLink data-pointer="link" to="#about">
           About
         </NuxtLink>
       </template>
       <template #flow>
-        <NuxtLink to="#about">
+        <NuxtLink data-pointer="link" to="#about">
           Flow
         </NuxtLink>
       </template>

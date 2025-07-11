@@ -16,6 +16,9 @@
     <div v-else-if="currentState === 'link'" class="pointer-link">
       <Icon name="pixelarticons:arrow-right" class="min-h-10 min-w-10 text-boss" />
     </div>
+    <div v-else-if="currentState === 'contact'" class="pointer-link">
+      <Icon name="pixelarticons:human-handsup" class="min-h-10 min-w-10 text-boss" />
+    </div>
     <div v-else-if="currentState === 'site'" class="pointer-link">
       <Icon name="pixelarticons:arrow-right" class="min-h-10 min-w-10 text-boss -rotate-45" />
     </div>
@@ -64,6 +67,14 @@ const props = defineProps({
     type: String,
     default: 'circle',
     validator: (value) => ['circle', 'square', 'rounded'].includes(value)
+  },
+  offsetX: {
+    type: Number,
+    default: 15
+  },
+  offsetY: {
+    type: Number,
+    default: 15
   }
 })
 
@@ -86,14 +97,14 @@ const yPoint = useMotionValue(0)
 const x = useSpring(xPoint, springConfig)
 const y = useSpring(yPoint, springConfig)
 
-// Mouse move handler
+// Mouse move handler with offset
 const handlePointerMove = ({ clientX, clientY }) => {
   const element = elementRef.value?.$el
   if (!element) return
 
   frame.read(() => {
-    xPoint.set(clientX - element.offsetWidth / 2)
-    yPoint.set(clientY - element.offsetHeight / 2)
+    xPoint.set(clientX - element.offsetWidth / 2 + props.offsetX)
+    yPoint.set(clientY - element.offsetHeight / 2 + props.offsetY)
   })
 }
 

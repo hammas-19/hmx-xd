@@ -23,7 +23,7 @@
           </div>
         </div>
         <!-- Start Project Button -->
-        <div
+        <div data-pointer="contact"
           class="bg-bubbles font-doto font-black hover:bg-snow text-black px-4 py-2 rounded-full text-sm transition-colors duration-200">
           <slot name="connect" />
         </div>

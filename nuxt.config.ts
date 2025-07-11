@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
+    '@nuxtjs/seo',
     'motion-v/nuxt'  // Add motion-v module
   ],
   fonts: {
