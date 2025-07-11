@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen top-conic pb-16">
+  <div class="h-screen top-conic pb-16 overflow-hidden">
     <div class="h-full flex flex-col md:flex-row md:justify-center justify-end  sm:items-end def-container  relative">
       <div class="absolute inset-y-0 top-1/12 w-full h-full  flex  items-center max-w-[820px]">
         <Motion :initial="{ opacity: 0, y: 50 }" :animate="{ opacity: 1, y: 0 }"
