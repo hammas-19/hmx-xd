@@ -34,7 +34,22 @@
     </div>
   </div>
 </template>
+
 <script setup>
+// Enhanced SEO Meta Tags
+useSeoMeta({
+  title: 'Hammas Masood - Frontend Developer Portfolio',
+  description: 'Portfolio showcasing modern web development projects including e-commerce platforms, PWAs, and educational websites built with Vue.js, Nuxt.js, and Python.',
+  ogTitle: 'Hammas Masood - Frontend Developer Portfolio',
+  ogDescription: 'Portfolio showcasing modern web development projects including e-commerce platforms, PWAs, and educational websites.',
+  ogImage: '/og-image.png',
+  ogUrl: 'https://hammasmasood.netlify.app/',
+  twitterTitle: 'Hammas Masood - Frontend Developer Portfolio',
+  twitterDescription: 'Portfolio showcasing modern web development projects built with Vue.js, Nuxt.js, and Python.',
+  twitterImage: '/og-image.png',
+  twitterCard: 'summary_large_image'
+})
+
 const projects = [
   {
     name: 'Ranked Designs',
@@ -119,9 +134,7 @@ const projects = [
       '/projects/rechik/1.jpg',
       '/projects/rechik/2.jpg',
       '/projects/rechik/3.jpg',
-      '/projects/rechik/4.jpg',
-      // '/projects/rechik/5.jpg',
-      // '/projects/rechik/6.jpg'
+      '/projects/rechik/4.jpg'
     ],
     vuejs: true,
     javascript: true,
@@ -138,8 +151,9 @@ const projects = [
   }
 ]
 </script>
+
 <style scoped>
- .smooth-scroll {
-   scroll-behavior: smooth;
- }
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
 </style>
