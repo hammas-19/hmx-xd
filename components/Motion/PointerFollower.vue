@@ -16,6 +16,9 @@
     <div v-else-if="currentState === 'link'" class="pointer-link">
       <Icon name="pixelarticons:arrow-right" class="min-h-10 min-w-10 text-boss" />
     </div>
+    <div v-else-if="currentState === 'site'" class="pointer-link">
+      <Icon name="pixelarticons:arrow-right" class="min-h-10 min-w-10 text-boss -rotate-45" />
+    </div>
     <div v-else-if="currentState === 'open'" class="pointer-link">
       <Icon name="pixelarticons:scale" class="min-h-10 min-w-10 text-boss" />
     </div>

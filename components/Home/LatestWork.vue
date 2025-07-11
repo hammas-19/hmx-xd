@@ -26,8 +26,7 @@
               <div class="flex justify-between">
                 <div class="flex flex-col gap-10">
                   <div class="flex items-center gap-5">
-                    <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl bg-black p-2"
-                      :alt="project.name">
+                    <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl p-2" :alt="project.name">
                     <span class="text-boss font-sora md:text-4xl text-xl font-black uppercase">{{ project.name }}</span>
                   </div>
                 </div>
@@ -59,6 +58,14 @@
                   <div v-if="project.illustration"
                     class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                     <Icon name="uil:illustration"
+                      class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
+                  </div>
+                  <div v-if="project.html" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                    <Icon name="iconoir:html5"
+                      class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
+                  </div>
+                  <div v-if="project.css" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                    <Icon name="tdesign:css3"
                       class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
                   </div>
                   <div v-if="project.github"
@@ -139,9 +146,12 @@
                     :exit="{ x: 50, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.3, ease: 'easeOut' }"
                     class="flex items-center gap-6 mb-6">
                     <img v-if="selectedProject?.logo" :src="selectedProject.logo"
-                      class="h-16 w-fit object-cover rounded-xl bg-black p-3" :alt="selectedProject.name">
-                    <h1 class="text-boss font-sora text-4xl md:text-6xl font-black uppercase">
-                      {{ selectedProject?.name }}
+                      class="h-16 w-fit object-cover rounded-xl p-2" :alt="selectedProject.name">
+                    <h1 data-pointer="site"
+                      class="text-boss font-sora text-4xl md:text-6xl font-black uppercase cursor-grabbing">
+                      <a :href="selectedProject?.link" target="_blank">
+                        {{ selectedProject?.name }}
+                      </a>
                     </h1>
                   </Motion>
                 </div>
@@ -149,27 +159,26 @@
                 <!-- Modal Content -->
                 <div class="space-y-8 ">
                   <!-- Project Description -->
-                  <div class="flex md:gap-10 gap-5">
+                  <div class="flex md:gap-10 gap-5 md:flex-row flex-col">
 
                     <Motion :initial="{ y: 60, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
                       :exit="{ y: -30, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.4, ease: 'easeOut' }"
-                      class="bg-boss rounded-3xl md:p-8 p-5">
-                      <h2 class="text-white font-doto text-2xl font-semibold mb-4">Description</h2>
-                      <p class="text-white text-lg leading-relaxed">
+                      class="bg-black rounded-3xl md:p-8 p-5">
+                      <h2 class="text-white font-doto md:text-2xl text-lg font-semibold mb-4">Description</h2>
+                      <p class="text-white md:text-lg text-sm leading-relaxed">
                         {{ selectedProject?.description }}
                       </p>
                     </Motion>
                     <div class="bg-snow rounded-3xl md:p-8 p-5">
-                      <h2 class="text-boss font-doto text-2xl font-semibold mb-6">Key Features
+                      <h2 class="text-boss font-doto md:text-2xl text-lg font-semibold mb-6">Key Features
                       </h2>
                       <div class="flex flex-wrap gap-4 ">
                         <div v-for="(achievements, aIndex) in selectedProject?.achievements" :key="aIndex"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="carbon:trophy" class="min-h-7 min-w-7 text-boss" />
-                          <span class="text-boss font-medium">{{ achievements }}</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="carbon:trophy" class="md:min-h-7 min-h-4 md:min-w-7 min-w-4 text-boss" />
+                          <span class="text-boss md:text-lg text-sm font-medium">{{ achievements }}</span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                   <!-- Project Details Section -->
@@ -179,83 +188,88 @@
                     <!-- Technologies Used -->
                     <Motion :initial="{ y: 60, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
                       :exit="{ y: -30, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.5, ease: 'easeOut' }"
-                      class="bg-snow rounded-3xl p-8 md:col-span-2">
-                      <h2 class="text-boss font-doto text-2xl font-semibold mb-6">Technologies Used</h2>
+                      class="bg-snow rounded-3xl md:p-8 p-5 md:col-span-2">
+                      <h2 class="text-boss font-doto md:text-2xl text-lg font-semibold mb-6">Technologies Used</h2>
                       <div class="flex flex-wrap gap-4">
                         <Motion v-if="selectedProject?.illustration" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 0.6, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="uil:illustration" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Illustration</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="uil:illustration"
+                            class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Illustration</span>
                         </Motion>
                         <Motion v-if="selectedProject?.github" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 0.7, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="lucide:github" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">GitHub</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="lucide:github" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">GitHub</span>
                         </Motion>
                         <Motion v-if="selectedProject?.nuxt" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 0.8, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="lineicons:nuxt" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Nuxt.js</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="lineicons:nuxt" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Nuxt.js</span>
                         </Motion>
                         <Motion v-if="selectedProject?.tailwind" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 0.9, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="flowbite:tailwind-solid" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Tailwind CSS</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="flowbite:tailwind-solid"
+                            class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Tailwind CSS</span>
                         </Motion>
                         <Motion v-if="selectedProject?.python" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 1.0, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="proicons:python" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Python</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="proicons:python"
+                            class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Python</span>
                         </Motion>
                         <Motion v-if="selectedProject?.javascript" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 1.1, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="ri:javascript-fill" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">JavaScript</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="ri:javascript-fill"
+                            class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">JavaScript</span>
                         </Motion>
                         <Motion v-if="selectedProject?.vuejs" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 1.2, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="mdi:vuejs" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Vue.js</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="mdi:vuejs" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Vue.js</span>
                         </Motion>
                         <Motion v-if="selectedProject?.netlify" :initial="{ scale: 0, rotate: -180 }"
                           :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
                           :transition="{ duration: 0.4, delay: 1.3, type: 'spring', stiffness: 300 }"
-                          class="bg-boss/10 p-3 rounded-2xl flex items-center gap-3">
-                          <Icon name="teenyicons:netlify-solid" class="h-8 w-8 text-boss min-h-7 min-w-7" />
-                          <span class="text-boss font-medium">Netlify</span>
+                          class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                          <Icon name="teenyicons:netlify-solid"
+                            class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                          <span class="md:text-lg text-sm text-boss font-medium">Netlify</span>
                         </Motion>
                       </div>
                     </Motion>
                     <Motion :initial="{ x: 50, opacity: 0 }" :animate="{ x: 0, opacity: 1 }"
                       :exit="{ x: 25, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.8, ease: 'easeOut' }"
-                      class="bg-black rounded-3xl p-8">
-                      <h3 class="text-snow text-xl font-semibold mb-4 font-doto">Project Stats</h3>
+                      class="bg-black rounded-3xl md:p-8 p-5">
+                      <h3 class="text-snow md:text-2xl text-lg font-semibold mb-4 font-doto">Project Stats</h3>
                       <div class="space-y-4">
                         <div class="flex justify-between">
                           <span class="font-doto  text-white">Duration:</span>
-                          <span class="text-white font-medium">3 months</span>
+                          <span class="text-white font-medium">{{ selectedProject?.duration }}</span>
                         </div>
                         <div class="flex justify-between">
                           <span class="font-doto  text-white">Status:</span>
-                          <span class="text-white font-medium">Completed</span>
+                          <span class="text-white font-medium">{{ selectedProject?.status }}</span>
                         </div>
                         <div class="flex justify-between">
                           <span class="font-doto  text-white">Type:</span>
-                          <span class="text-white font-medium">Web Application</span>
+                          <span class="text-white font-medium">{{ selectedProject?.type }}</span>
                         </div>
                       </div>
                     </Motion>
@@ -263,7 +277,8 @@
                   <div v-if="selectedProject?.images" class="grid md:grid-cols-2 gap-10">
                     <div v-for="(images, index) in selectedProject?.images" :key="index"
                       :class="index % 3 === 0 ? 'md:col-span-2' : 'md:col-span-1'">
-                      <img :src="images" class="rounded-3xl h-full w-full object-cover" alt="">
+                      <img :src="images" class="rounded-3xl h-full w-full object-cover border border-snow border-dashed"
+                        alt="">
                     </div>
                   </div>
                 </div>

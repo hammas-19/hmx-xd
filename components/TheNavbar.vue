@@ -33,7 +33,7 @@
 
         <!-- Start Project Button -->
         <button
-          class="bg-bubbles font-doto font-black hover:bg-yellow-500 text-black px-4 py-2 rounded-full text-sm transition-colors duration-200">
+          class="bg-bubbles font-doto font-black hover:bg-snow text-black px-4 py-2 rounded-full text-sm transition-colors duration-200">
           Connect
         </button>
       </div>
