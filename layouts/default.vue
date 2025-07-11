@@ -7,8 +7,11 @@
     </a>
 
     <!-- Custom cursor/pointer follower -->
-    <MotionPointerFollower :offset-x="40" :offset-y="10" :size="30" color="#5757573b" :damping="11" :stiffness="100"
-      shape="circle" />
+    <div class="md:block hidden">
+
+      <MotionPointerFollower :offset-x="40" :offset-y="10" :size="30" color="#5757573b" :damping="11" :stiffness="100"
+        shape="circle" />
+    </div>
 
     <!-- Main content wrapper -->
     <div id="main-content" tabindex="-1">

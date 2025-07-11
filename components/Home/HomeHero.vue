@@ -5,7 +5,7 @@
       <div class="absolute inset-y-0 top-1/12 w-full h-full  flex  items-center max-w-[820px]">
         <Motion :initial="{ opacity: 0, y: 50 }" :animate="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.8, delay: 0.2, ease: 'easeOut' }">
-          <p class="md:text-2xl text-2xl text-boss !text-left font-black font-doto px-10">
+          <p class="md:text-2xl text-base  text-boss !text-left font-black font-doto sm:px-10 px-5 -mb-40 sm:mb-0">
             <Motion v-for="(word, index) in words" :key="index" class="inline-block mr-2"
               :initial="{ opacity: 0, y: 20, rotateX: -90 }" :animate="{ opacity: 1, y: 0, rotateX: 0 }" :transition="{
               duration: 0.6,

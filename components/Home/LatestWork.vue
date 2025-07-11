@@ -1,6 +1,6 @@
 <template>
-  <div class=" def-padding-full">
-    <div class="mt-40 md:mb-20 mb-14 w-fit mx-auto flex flex-col">
+  <div class="">
+    <div class="md:mt-40 mt-20 md:mb-20 mb-14 w-fit mx-auto flex flex-col">
       <small class="self-end font-doto text-2xl font-bold">
         <MotionAnimatedText text="til today!" animation="fadeIn" stagger />
       </small>
@@ -8,7 +8,7 @@
         Recent Performance
       </h2>
     </div>
-    <div class="def-container space-y-40">
+    <div class="def-container md:space-y-32 space-y-10">
       <Motion v-for="(project, index) in props.projects" :key="index" :initial="{ opacity: 0, y: 100 }"
         :while-in-view="{ opacity: 1, y: 0 }" :transition="{
           duration: 0.5,
@@ -22,12 +22,12 @@
           <div class="w-full h-full absolute inset-0 top-conic md:rounded-[50px] rounded-[35px]" />
           <div
             class="border-4 md:rounded-[50px] rounded-[35px] border-black w-full bg-[#ffffff] hover:bg-transparent  backdrop-blur-sm overflow-hidden">
-            <div class="py-10 px-5">
+            <div class="md:py-10 py-2 md:px-5 px-2 ">
               <div class="flex justify-between">
                 <div class="flex flex-col gap-10">
                   <div class="flex items-center gap-5">
                     <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl p-2" :alt="project.name">
-                    <span class="text-boss font-sora md:text-4xl text-xl font-black uppercase">{{ project.name }}</span>
+                    <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{ project.name }}</span>
                   </div>
                 </div>
                 <!-- Arrow Button with click handler -->
@@ -50,8 +50,8 @@
               </div>
               <!-- Dynamic Data -->
               <div
-                class="md:min-h-[300px] bg-boss md:rounded-tr-[40px] rounded-tr-[20px] flex flex-col justify-end p-5 md:gap-10 gap-5">
-                <p class="text-white md:text-xl font-medium">
+                class="md:min-h-[300px] bg-boss md:rounded-tr-[40px] rounded-tr-[20px] flex flex-col justify-end p-5 sm:gap-10 gap-5">
+                <p class="text-white sm:text-xl text-xs font-medium line-clamp-3">
                   {{ project.description }}
                 </p>
                 <div class="flex flex-wrap gap-3">
@@ -141,14 +141,14 @@
               <Motion :initial="{ y: 50, opacity: 0 }" :animate="{ y: 0, opacity: 1 }" :exit="{ y: -30, opacity: 0 }"
                 :transition="{ duration: 0.6, delay: 0.1, ease: 'easeOut' }" class="p-5 md:p-12 lg:p-16">
                 <!-- Modal Header -->
-                <div class="mb-8">
+                <div class="mb-8 ">
                   <Motion :initial="{ x: -100, opacity: 0 }" :animate="{ x: 0, opacity: 1 }"
                     :exit="{ x: 50, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.3, ease: 'easeOut' }"
-                    class="flex items-center gap-6 mb-6">
+                    class="flex sm:items-center sm:gap-6 gap-2 sm:flex-row flex-col sm:mb-6 ">
                     <img v-if="selectedProject?.logo" :src="selectedProject.logo"
                       class="h-16 w-fit object-cover rounded-xl p-2" :alt="selectedProject.name">
                     <h1 data-pointer="site"
-                      class="text-boss font-sora text-4xl md:text-6xl font-black uppercase cursor-grabbing">
+                      class="text-boss font-sora sm:text-4xl text-2xl md:text-6xl font-black uppercase cursor-grabbing">
                       <a :href="selectedProject?.link" target="_blank">
                         {{ selectedProject?.name }}
                       </a>
