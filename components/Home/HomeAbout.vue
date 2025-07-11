@@ -24,9 +24,9 @@
         </p>
 
       </div>
-      <div class="lg:col-span-3 lg:rounded-[40px] rounded-[30px] flex justify-center  w-full">
+      <div class="lg:col-span-3 lg:rounded-[40px] rounded-[30px] flex justify-center bottom-conic w-full">
         <div class="lg:rounded-[40px] rounded-[30px] overflow-hidden">
-          <img src="/home/heelo.gif" class="aspect-video lg:rounded-[40px] rounded-[30px] object-cover h-full" alt="">
+          <img src="/home/heelo-unscreen.gif" class="aspect-video lg:rounded-[40px] rounded-[30px] object-cover h-full" alt="">
         </div>
       </div>
     </div>

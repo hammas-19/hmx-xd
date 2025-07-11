@@ -5,7 +5,9 @@
 @import "./theme.css";
 
 /* Default Styling */
-
+* {
+  scroll-behavior: smooth;
+}
 body {
   font-family: var(--font-outfit);
   color: var(--color-darkLiver);
@@ -14,10 +16,10 @@ body {
   box-sizing: border-box;
 }
 .top-conic {
-  background: radial-gradient(ellipse at top, #bfdef9, #e7f3fd, #fcfcfc);
+  background: radial-gradient(ellipse at top, #c3fcb1, #edfae9, #fcfcfc);
 }
 .bottom-conic {
-  background: radial-gradient(ellipse at bottom, #bfdef9, #e7f3fd, #fcfcfc);
+  background: radial-gradient(ellipse at bottom, #c3fcb1, #edfae9, #fcfcfc);
 }
 .button-primary {
   padding: 0.5rem 10rem;

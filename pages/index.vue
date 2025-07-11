@@ -1,10 +1,37 @@
 <template>
   <div>
+    <TheNavbar>
+      <template #work>
+        <NuxtLink to="#work">
+          Work
+        </NuxtLink>
+      </template>
+      <template #about>
+        <NuxtLink to="#about">
+          About
+        </NuxtLink>
+      </template>
+      <template #flow>
+        <NuxtLink to="#about">
+          Flow
+        </NuxtLink>
+      </template>
+      <template #connect>
+        <NuxtLink to="#connect">
+          Connect
+        </NuxtLink>
+      </template>
+    </TheNavbar>
     <HomeHero />
-    <HomeLatestWork :projects="projects" />
-    <HomeAbout />
-    <HomeConnectBtn />
-    <!-- <TestComp /> -->
+    <div id="work">
+      <HomeLatestWork :projects="projects" />
+    </div>
+    <div id="about">
+      <HomeAbout />
+    </div>
+    <div id="connect">
+      <TheFooter />
+    </div>
   </div>
 </template>
 <script setup>
@@ -111,3 +138,8 @@ const projects = [
   }
 ]
 </script>
+<style scoped>
+ .smooth-scroll {
+   scroll-behavior: smooth;
+ }
+</style>
