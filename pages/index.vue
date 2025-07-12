@@ -42,11 +42,11 @@ useSeoMeta({
   description: 'Portfolio showcasing modern web development projects including e-commerce platforms, PWAs, and educational websites built with Vue.js, Nuxt.js, and Python.',
   ogTitle: 'Hammas Masood - Frontend Developer Portfolio',
   ogDescription: 'Portfolio showcasing modern web development projects including e-commerce platforms, PWAs, and educational websites.',
-  ogImage: '/og-image.png',
+  ogImage: '/og-image.jpg',
   ogUrl: 'https://hammasmasood.netlify.app/',
   twitterTitle: 'Hammas Masood - Frontend Developer Portfolio',
   twitterDescription: 'Portfolio showcasing modern web development projects built with Vue.js, Nuxt.js, and Python.',
-  twitterImage: '/og-image.png',
+  twitterImage: '/og-image.jpg',
   twitterCard: 'summary_large_image'
 })
 

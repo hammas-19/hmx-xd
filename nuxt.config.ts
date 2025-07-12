@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'Hammas Masood - Frontend Developer Portfolio' },
         { property: 'og:description', content: 'Portfolio showcasing modern web development projects including e-commerce platforms, PWAs, and educational websites built with Vue.js, Nuxt.js, and Python.' },
-        { property: 'og:image', content: '/og-image.png' },
+        { property: 'og:image', content: '/og-image.jpg' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { property: 'og:url', content: 'https://hammasmasood.netlify.app/' },
@@ -33,7 +33,7 @@ export default defineNuxtConfig({
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Hammas Masood - Frontend Developer Portfolio' },
         { name: 'twitter:description', content: 'Portfolio showcasing modern web development projects built with Vue.js, Nuxt.js, and Python.' },
-        { name: 'twitter:image', content: '/og-image.png' },
+        { name: 'twitter:image', content: '/og-image.jpg' },
 
         // Additional SEO
         { name: 'theme-color', content: '#000000' }
