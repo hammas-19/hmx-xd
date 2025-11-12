@@ -52,6 +52,31 @@ useSeoMeta({
 
 const projects = [
   {
+    name: 'Codes Hawk',
+    logo: '/projects/codesHawk/logo.jpeg',
+    description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions that propel your business forward.',
+    achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio'],
+    images: [
+      '/projects/codesHawk/1.jpg',
+      '/projects/codesHawk/2.jpg',
+      '/projects/codesHawk/3.jpg',
+      '/projects/codesHawk/4.jpg',
+      '/projects/codesHawk/5.jpg'
+    ],
+    javascript: true,
+    netlify: true,
+    github: true,
+    nuxt: true,
+    vuejs: true,
+    framer: true,
+    css: true,
+    tailwind: true,
+    type: 'Portfolio',
+    status: 'On stage',
+    duration: '---',
+    link: 'https://codeshawk.com/',
+  },
+  {
     name: 'Ranked Designs',
     logo: '/projects/rankedDesigns/logo.webp',
     description: 'Ranked Designs delivers top-quality services with a team of experts who know how to make your brand stand out. We use the best tools and strategies to create solutions that are affordable, effective, and tailored to your needs. From websites to marketing materials, we handle everything to save you time and effort.',

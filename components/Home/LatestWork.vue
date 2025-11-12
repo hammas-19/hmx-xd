@@ -27,7 +27,8 @@
                 <div class="flex flex-col gap-10">
                   <div class="flex items-center gap-5">
                     <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl p-2" :alt="project.name">
-                    <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{ project.name }}</span>
+                    <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{
+                      project.name }}</span>
                   </div>
                 </div>
                 <!-- Arrow Button with click handler -->
@@ -75,6 +76,11 @@
                   </div>
                   <div v-if="project.nuxt" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                     <Icon name="lineicons:nuxt"
+                      class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
+                  </div>
+                  <div v-if="project.framer"
+                    class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                    <Icon name="ph:framer-logo"
                       class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
                   </div>
                   <div v-if="project.tailwind"
@@ -152,6 +158,7 @@
                       <a :href="selectedProject?.link" target="_blank">
                         {{ selectedProject?.name }}
                       </a>
+                      <Icon name="pixelarticons:arrow-right" class="min-h-6 min-w-6 text-boss -rotate-45" />
                     </h1>
                   </Motion>
                 </div>
