@@ -18,7 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Connect to Socket.IO server
   // Update this URL to match your server's address
-  const socket = io(process.env.NUXT_PUBLIC_SOCKET_URL || 'http://localhost:3001', {
+  const socket = io(process.env.NUXT_PUBLIC_SOCKET_URL || 'https://hmx-xd.onrender.com', {
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,

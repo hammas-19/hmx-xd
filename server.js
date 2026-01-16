@@ -16,6 +16,8 @@ const io = new Server(httpServer, {
     origin: [
       'http://localhost:3000',
       'http://localhost:3001',
+      'https://hmx-xd.netlify.app',
+      'https://hmx-xd.onrender.com',
       'http://127.0.0.1:3000',
       // Add your Netlify domain here when deploying
       // Example: 'https://your-site.netlify.app'
