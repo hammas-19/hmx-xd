@@ -6,16 +6,16 @@
 import { ref, onBeforeUnmount } from 'vue'
 import type { Socket } from 'socket.io-client'
 
-// Throttle function for single-argument callbacks
-function throttleWithArg<T>(func: (arg: T) => void, limit: number) {
+// Throttle function for callbacks
+function throttle(func: () => void, limit: number) {
   let inThrottle: boolean
-  return function (this: unknown, arg: T) {
+  return function (this: unknown) {
     if (!inThrottle) {
-      func(arg)
+      func()
       inThrottle = true
       setTimeout(() => (inThrottle = false), limit)
     }
-  } as (arg: T) => void
+  }
 }
 export const useSecondScreen = () => {
   const { $socket } = useNuxtApp()
@@ -62,14 +62,14 @@ export const useSecondScreen = () => {
    * Emit scroll position to other connected clients
    * Throttled to 30ms intervals for performance
    */
-  const emitScrollPosition = throttleWithArg((scrollY: number) => {
+  const emitScrollPosition = (scrollY: number) => {
     if (sessionId.value) {
       socket.emit('scroll-position', {
         sessionId: sessionId.value,
         position: scrollY,
       })
     }
-  }, 30)
+  }
 
   /**
    * Handle incoming scroll position updates
@@ -97,12 +97,12 @@ export const useSecondScreen = () => {
       onScroll(window.scrollY)
     }
 
-    const throttledScroll = throttleWithArg(handleScroll, 30)
+    const throttledScroll = throttle(handleScroll, 30)
 
-    window.addEventListener('scroll', throttledScroll as unknown as EventListener, { passive: true })
+    window.addEventListener('scroll', throttledScroll, { passive: true })
 
     onBeforeUnmount(() => {
-      window.removeEventListener('scroll', throttledScroll as unknown as EventListener)
+      window.removeEventListener('scroll', throttledScroll)
     })
   }
 
@@ -115,17 +115,17 @@ export const useSecondScreen = () => {
       onScroll(window.scrollY)
     }
 
-    const throttledScroll = throttleWithArg(handleScroll, 30)
+    const throttledScroll = throttle(handleScroll, 30)
 
     // Handle wheel events (mouse scroll)
-    window.addEventListener('wheel', throttledScroll as unknown as EventListener, { passive: true })
+    window.addEventListener('wheel', throttledScroll, { passive: true })
 
     // Handle touch events (mobile scroll)
-    window.addEventListener('scroll', throttledScroll as unknown as EventListener, { passive: true })
+    window.addEventListener('scroll', throttledScroll, { passive: true })
 
     onBeforeUnmount(() => {
-      window.removeEventListener('wheel', throttledScroll as unknown as EventListener)
-      window.removeEventListener('scroll', throttledScroll as unknown as EventListener)
+      window.removeEventListener('wheel', throttledScroll)
+      window.removeEventListener('scroll', throttledScroll)
     })
   }
 
