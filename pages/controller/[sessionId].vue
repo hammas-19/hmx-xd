@@ -176,11 +176,17 @@ onMounted(() => {
   // Watch connection status
   watchConnectionStatus()
 
-  // Attach mobile scroll listener to emit position to viewers
+  // Attach mobile scroll listener to emit position to desktop viewers
   attachMobileListener((scrollY: number) => {
     currentScrollPosition.value = scrollY
-    // Emit scroll position to all viewers in this session
-    emitScrollPosition(scrollY)
+    // Emit scroll position directly to session
+    const socket = $socket as Socket
+    if (socket && pageSessionId.value) {
+      socket.emit('scroll-position', {
+        sessionId: pageSessionId.value,
+        position: scrollY,
+      })
+    }
   })
 
   // Listen to any messages from the server

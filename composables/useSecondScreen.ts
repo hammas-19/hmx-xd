@@ -93,14 +93,16 @@ export const useSecondScreen = () => {
    * Auto-cleanup on component unmount
    */
   const attachScrollListener = (onScroll: (scrollY: number) => void) => {
-    const handleScroll = throttleWithArg(() => {
+    const handleScroll = () => {
       onScroll(window.scrollY)
-    }, 30)
+    }
 
-    window.addEventListener('scroll', handleScroll as unknown as EventListener, { passive: true })
+    const throttledScroll = throttleWithArg(handleScroll, 30)
+
+    window.addEventListener('scroll', throttledScroll as unknown as EventListener, { passive: true })
 
     onBeforeUnmount(() => {
-      window.removeEventListener('scroll', handleScroll as unknown as EventListener)
+      window.removeEventListener('scroll', throttledScroll as unknown as EventListener)
     })
   }
 
@@ -109,19 +111,21 @@ export const useSecondScreen = () => {
    * Handles both wheel and touch events
    */
   const attachMobileListener = (onScroll: (scrollY: number) => void) => {
-    const handleScroll = throttleWithArg(() => {
+    const handleScroll = () => {
       onScroll(window.scrollY)
-    }, 30)
+    }
+
+    const throttledScroll = throttleWithArg(handleScroll, 30)
 
     // Handle wheel events (mouse scroll)
-    window.addEventListener('wheel', handleScroll as unknown as EventListener, { passive: true })
+    window.addEventListener('wheel', throttledScroll as unknown as EventListener, { passive: true })
 
     // Handle touch events (mobile scroll)
-    window.addEventListener('scroll', handleScroll as unknown as EventListener, { passive: true })
+    window.addEventListener('scroll', throttledScroll as unknown as EventListener, { passive: true })
 
     onBeforeUnmount(() => {
-      window.removeEventListener('wheel', handleScroll as unknown as EventListener)
-      window.removeEventListener('scroll', handleScroll as unknown as EventListener)
+      window.removeEventListener('wheel', throttledScroll as unknown as EventListener)
+      window.removeEventListener('scroll', throttledScroll as unknown as EventListener)
     })
   }
 

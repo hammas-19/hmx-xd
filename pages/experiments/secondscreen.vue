@@ -274,26 +274,18 @@ onMounted(async () => {
     { immediate: false }
   )
 
-  // Attach scroll listener and emit scroll position updates
-  attachScrollListener((scrollY: number) => {
-    const { $socket } = useNuxtApp()
-    const socket = $socket as Socket // Type assertion for Socket instance
-    // Emit scroll position to controller
-    socket.emit('scroll-position', {
-      sessionId: sessionId.value,
-      position: scrollY,
-    })
-  })
+  // Flag to prevent scroll feedback loops
+  let isRemoteScrolling = false
 
   // Listen for incoming scroll commands from mobile controller
-  onScrollPosition((_position: number) => {
-    // Only respond to scroll commands if we're the viewer
-    // Desktop page receives scroll from mobile and applies it
+  onScrollPosition((position: number) => {
     if (typeof window !== 'undefined') {
-      // Smooth scroll to position sent by mobile controller
-      // This creates the effect of mobile controlling desktop scroll
-      // Disabled here since desktop is the initiator, but kept for reference
-      // window.scrollTo({ top: position, behavior: 'auto' })
+      isRemoteScrolling = true
+      window.scrollTo({ top: position, behavior: 'auto' })
+      // Reset flag after scroll completes
+      setTimeout(() => {
+        isRemoteScrolling = false
+      }, 100)
     }
   })
 })
