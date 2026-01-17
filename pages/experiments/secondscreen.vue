@@ -222,7 +222,7 @@
 
 <script setup lang="ts">
 import QRCode from 'qrcode'
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useSecondScreen } from '~/composables/useSecondScreen'
 import type { Socket } from 'socket.io-client'
 
@@ -248,34 +248,6 @@ onMounted(async () => {
   // Watch connection status
   watchConnectionStatus()
 
-  // Setup QR code when session is shown
-  watch(
-    sessionShown,
-    async (isShown) => {
-      if (isShown && qrContainer.value && sessionId.value) {
-        try {
-          qrContainer.value.innerHTML = ''
-          const QRCodeLib = QRCode as typeof QRCode & { toCanvas: typeof QRCode.toCanvas }
-          await QRCodeLib.toCanvas(
-            qrContainer.value,
-            controllerUrl.value,
-            {
-              width: 256,
-              margin: 2,
-              color: {
-                dark: '#000000',
-                light: '#ffffff',
-              },
-            }
-          )
-        } catch (err) {
-          console.error('Failed to generate QR code:', err)
-        }
-      }
-    },
-    { immediate: false }
-  )
-
   // Listen for incoming scroll commands from mobile controller
   onScrollPosition((position: number) => {
     if (typeof window !== 'undefined') {
@@ -283,6 +255,33 @@ onMounted(async () => {
       window.scrollTo({ top: position, behavior: 'auto' })
     }
   })
+})
+
+// Setup QR code generation when modal is shown
+watch(sessionShown, async (isShown) => {
+  if (isShown && sessionId.value) {
+    await nextTick() // Wait for DOM to render
+    if (qrContainer.value) {
+      try {
+        qrContainer.value.innerHTML = ''
+        const canvas = document.createElement('canvas')
+        await QRCode.toCanvas(canvas, controllerUrl.value, {
+          width: 256,
+          margin: 2,
+          color: {
+            dark: '#000000',
+            light: '#ffffff',
+          },
+        })
+        qrContainer.value.appendChild(canvas)
+        console.log('[viewer] QR code generated for:', controllerUrl.value)
+      } catch (err) {
+        console.error('[viewer] Failed to generate QR code:', err)
+      }
+    } else {
+      console.error('[viewer] qrContainer ref not found')
+    }
+  }
 })
 
 // Graceful fallback message (shown when JavaScript is disabled or SSR issue)
