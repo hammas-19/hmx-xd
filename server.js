@@ -14,17 +14,16 @@ const httpServer = createServer()
 const io = new Server(httpServer, {
   cors: {
     origin: [
-      'http://localhost:3000',
-      'http://localhost:3001',
+      process.env.CLIENT_URL || '',
       'https://hmx-xd.netlify.app',
       'https://hmx-xd.onrender.com',
+      'http://localhost:3000',
+      'http://localhost:3001',
       'http://127.0.0.1:3000',
-      // Add your Netlify domain here when deploying
-      // Example: 'https://your-site.netlify.app'
-      process.env.CLIENT_URL || '',
     ].filter(Boolean),
     methods: ['GET', 'POST'],
     credentials: true,
+    allowedHeaders: ['*'],
   },
   transports: ['websocket', 'polling'],
 })
@@ -133,8 +132,7 @@ io.on('connection', (socket) => {
       from: socket.id,
     })
 
-    // Optional: Log for debugging
-    // console.log(`Scroll update in ${sessionId}: ${position}px from ${socket.id}`)
+    console.log(`Scroll update in ${sessionId}: ${position}px from ${socket.id}`)
   })
 
   /**

@@ -123,7 +123,7 @@ const router = useRouter()
 
 const { $socket } = useNuxtApp()
 
-const { sessionId, isConnected, joinSession, leaveSession, attachMobileListener, emitScrollPosition, watchConnectionStatus } =
+const { sessionId, isConnected, joinSession, leaveSession, attachMobileListener, emitScrollPosition, watchConnectionStatus, onConnected } =
   useSecondScreen()
 
 const currentScrollPosition = ref(0)
@@ -170,8 +170,8 @@ onMounted(() => {
     return
   }
 
-  // Join the session
-  joinSession(pageSessionId.value)
+  // Join the session after socket connects
+  onConnected(() => joinSession(pageSessionId.value))
 
   // Watch connection status
   watchConnectionStatus()
@@ -182,6 +182,7 @@ onMounted(() => {
     // Emit scroll position directly to session
     const socket = $socket as Socket
     if (socket && pageSessionId.value) {
+      console.log('[controller] emit scroll-position', { sessionId: pageSessionId.value, scrollY })
       socket.emit('scroll-position', {
         sessionId: pageSessionId.value,
         position: scrollY,
@@ -198,6 +199,7 @@ onMounted(() => {
 
   // Handle scroll command from viewers (if needed for feedback)
   socket.on('scroll-command', (data: { position: number }) => {
+    console.log('[controller] scroll-command received', data)
     currentScrollPosition.value = data.position
   })
 })

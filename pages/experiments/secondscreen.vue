@@ -226,7 +226,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useSecondScreen } from '~/composables/useSecondScreen'
 import type { Socket } from 'socket.io-client'
 
-const { sessionId, isConnected, participantCount, generateSessionId, attachScrollListener, onScrollPosition, watchConnectionStatus } =
+const { sessionId, isConnected, participantCount, generateSessionId, joinSession, onScrollPosition, watchConnectionStatus, onConnected } =
   useSecondScreen()
 
 const sessionShown = ref(false)
@@ -242,6 +242,8 @@ const controllerUrl = computed(() => {
 onMounted(async () => {
   // Generate unique session ID
   generateSessionId()
+  // Join the session room as viewer after socket connects
+  onConnected(() => joinSession(sessionId.value))
 
   // Watch connection status
   watchConnectionStatus()
@@ -274,18 +276,11 @@ onMounted(async () => {
     { immediate: false }
   )
 
-  // Flag to prevent scroll feedback loops
-  let isRemoteScrolling = false
-
   // Listen for incoming scroll commands from mobile controller
   onScrollPosition((position: number) => {
     if (typeof window !== 'undefined') {
-      isRemoteScrolling = true
+      console.log('[viewer] applying scroll-position', position)
       window.scrollTo({ top: position, behavior: 'auto' })
-      // Reset flag after scroll completes
-      setTimeout(() => {
-        isRemoteScrolling = false
-      }, 100)
     }
   })
 })

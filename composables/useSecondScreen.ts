@@ -89,6 +89,17 @@ export const useSecondScreen = () => {
   }
 
   /**
+   * Run callback once socket is connected
+   */
+  const onConnected = (cb: () => void) => {
+    if (socket.connected) {
+      cb()
+    } else {
+      socket.once('connect', cb)
+    }
+  }
+
+  /**
    * Attach scroll listener to window
    * Auto-cleanup on component unmount
    */
@@ -163,6 +174,7 @@ export const useSecondScreen = () => {
     emitScrollPosition,
     onScrollPosition,
     onSessionStatus,
+    onConnected,
     attachScrollListener,
     attachMobileListener,
     watchConnectionStatus,
