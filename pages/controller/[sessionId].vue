@@ -106,6 +106,19 @@
               This page acts as a controller. Open the desktop page to see it scroll.
             </p>
           </div>
+
+          <!-- Infinite Scroll Pad -->
+          <div class="mt-8 p-4 rounded-lg bg-slate-800/50 border border-slate-600">
+            <p class="text-sm text-gray-300 mb-4 font-semibold">Scroll Pad</p>
+            <p class="text-xs text-gray-400 mb-3">Scroll this area to drive the desktop page. It is intentionally tall.</p>
+            <div class="relative rounded-lg border border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 overflow-hidden h-[300vh]">
+              <div class="sticky top-0 left-0 right-0 flex items-center justify-between px-4 py-2 text-[11px] text-gray-400 bg-slate-900/70 backdrop-blur-sm border-b border-slate-700/60">
+                <span>Scroll down to send updates</span>
+                <span class="font-mono text-blue-300">{{ Math.round(currentScrollPosition) }} px</span>
+              </div>
+              <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.04),transparent_35%),radial-gradient(circle_at_20%_60%,rgba(59,130,246,0.07),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(56,189,248,0.06),transparent_35%)]" />
+            </div>
+          </div>
         </div>
       </div>
     </ClientOnly>
