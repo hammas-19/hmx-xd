@@ -107,16 +107,21 @@
             </p>
           </div>
 
-          <!-- Infinite Scroll Pad -->
+          <!-- Virtual Scroll Pad (infinite control) -->
           <div class="mt-8 p-4 rounded-lg bg-slate-800/50 border border-slate-600">
             <p class="text-sm text-gray-300 mb-4 font-semibold">Scroll Pad</p>
-            <p class="text-xs text-gray-400 mb-3">Scroll this area to drive the desktop page. It is intentionally tall.</p>
-            <div class="relative rounded-lg border border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 overflow-hidden h-[300vh]">
-              <div class="sticky top-0 left-0 right-0 flex items-center justify-between px-4 py-2 text-[11px] text-gray-400 bg-slate-900/70 backdrop-blur-sm border-b border-slate-700/60">
-                <span>Scroll down to send updates</span>
+            <p class="text-xs text-gray-400 mb-3">Use this pad to drive the desktop page. It captures wheel/touch without local limits.</p>
+            <div
+              ref="padRef"
+              class="relative rounded-lg border border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 h-[60vh] select-none cursor-grab"
+              tabindex="0"
+              style="touch-action: none; overscroll-behavior: contain;"
+            >
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.04),transparent_35%),radial-gradient(circle_at_20%_60%,rgba(59,130,246,0.07),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(56,189,248,0.06),transparent_35%)]" />
+              <div class="absolute top-2 left-2 right-2 flex items-center justify-between px-4 py-2 text-[11px] text-gray-400 bg-slate-900/50 backdrop-blur-sm border border-slate-700/60 rounded">
+                <span>Scroll or drag here to send updates</span>
                 <span class="font-mono text-blue-300">{{ Math.round(currentScrollPosition) }} px</span>
               </div>
-              <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.04),transparent_35%),radial-gradient(circle_at_20%_60%,rgba(59,130,246,0.07),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(56,189,248,0.06),transparent_35%)]" />
             </div>
           </div>
         </div>
@@ -126,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSecondScreen } from '~/composables/useSecondScreen'
 import type { Socket } from 'socket.io-client'
@@ -136,10 +141,42 @@ const router = useRouter()
 
 const { $socket } = useNuxtApp()
 
-const { sessionId, isConnected, joinSession, leaveSession, attachMobileListener, emitScrollPosition, watchConnectionStatus, onConnected } =
+const { sessionId, isConnected, joinSession, leaveSession, watchConnectionStatus, onConnected } =
   useSecondScreen()
 
 const currentScrollPosition = ref(0)
+const controllerPosition = ref(0)
+const padRef = ref<HTMLDivElement | null>(null)
+const socket = $socket as Socket
+
+const MAX_SCROLL_POSITION = 5000
+const clampPosition = (pos: number) => Math.max(0, Math.min(pos, MAX_SCROLL_POSITION))
+
+// Virtual scroll helpers
+let rafPending = false
+let touchStartY = 0
+let onWheel: (e: WheelEvent) => void
+let onTouchStart: (e: TouchEvent) => void
+let onTouchMove: (e: TouchEvent) => void
+
+const emitPosition = () => {
+  currentScrollPosition.value = controllerPosition.value
+  if (socket && pageSessionId.value) {
+    socket.emit('scroll-position', {
+      sessionId: pageSessionId.value,
+      position: Math.max(0, controllerPosition.value),
+    })
+  }
+}
+
+const scheduleEmit = () => {
+  if (rafPending) return
+  rafPending = true
+  requestAnimationFrame(() => {
+    rafPending = false
+    emitPosition()
+  })
+}
 const sessionError = ref<string>('')
 
 // Extract session ID from route parameter
@@ -153,8 +190,14 @@ const pageSessionId = computed(() => {
  * Emits scroll position to all connected viewers
  */
 const quickScroll = (amount: number) => {
-  if (typeof window !== 'undefined') {
-    window.scrollBy({ top: amount, behavior: 'smooth' })
+  controllerPosition.value = clampPosition(controllerPosition.value + amount)
+  currentScrollPosition.value = controllerPosition.value
+  const socket = $socket as Socket
+  if (socket && pageSessionId.value) {
+    socket.emit('scroll-position', {
+      sessionId: pageSessionId.value,
+      position: controllerPosition.value,
+    })
   }
 }
 
@@ -162,8 +205,14 @@ const quickScroll = (amount: number) => {
  * Scroll to top
  */
 const scrollToTop = () => {
-  if (typeof window !== 'undefined') {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  controllerPosition.value = 0
+  currentScrollPosition.value = 0
+  const socket = $socket as Socket
+  if (socket && pageSessionId.value) {
+    socket.emit('scroll-position', {
+      sessionId: pageSessionId.value,
+      position: 0,
+    })
   }
 }
 
@@ -176,7 +225,7 @@ const handleLeaveSession = () => {
 }
 
 // Setup on mount
-onMounted(() => {
+onMounted(async () => {
   // Validate session ID from route
   if (!pageSessionId.value) {
     sessionError.value = 'Invalid session ID. Please scan a valid QR code.'
@@ -189,22 +238,42 @@ onMounted(() => {
   // Watch connection status
   watchConnectionStatus()
 
-  // Attach mobile scroll listener to emit position to desktop viewers
-  attachMobileListener((scrollY: number) => {
-    currentScrollPosition.value = scrollY
-    // Emit scroll position directly to session
-    const socket = $socket as Socket
-    if (socket && pageSessionId.value) {
-      console.log('[controller] emit scroll-position', { sessionId: pageSessionId.value, scrollY })
-      socket.emit('scroll-position', {
-        sessionId: pageSessionId.value,
-        position: scrollY,
-      })
-    }
-  })
+  // Virtual scroll handlers on the pad
+  onWheel = (e: WheelEvent) => {
+    e.preventDefault()
+    controllerPosition.value = clampPosition(controllerPosition.value + e.deltaY)
+    scheduleEmit()
+  }
+  onTouchStart = (e: TouchEvent) => {
+    touchStartY = e.touches[0].clientY
+  }
+  onTouchMove = (e: TouchEvent) => {
+    e.preventDefault()
+    const dy = touchStartY - e.touches[0].clientY
+    controllerPosition.value = clampPosition(controllerPosition.value + dy)
+    touchStartY = e.touches[0].clientY
+    scheduleEmit()
+  }
+
+  await nextTick()
+  if (padRef.value) {
+    padRef.value.addEventListener('wheel', onWheel, { passive: false })
+    padRef.value.addEventListener('touchstart', onTouchStart, { passive: true })
+    padRef.value.addEventListener('touchmove', onTouchMove, { passive: false })
+    console.log('[controller] pad listeners attached')
+  } else {
+    console.warn('[controller] padRef not ready; retrying attach')
+    setTimeout(() => {
+      if (padRef.value) {
+        padRef.value.addEventListener('wheel', onWheel, { passive: false })
+        padRef.value.addEventListener('touchstart', onTouchStart, { passive: true })
+        padRef.value.addEventListener('touchmove', onTouchMove, { passive: false })
+        console.log('[controller] pad listeners attached (retry)')
+      }
+    }, 50)
+  }
 
   // Listen to any messages from the server
-  const socket = $socket as Socket // Type assertion for Socket instance
   socket.on('error', (error: { message: string }) => {
     console.error('Session error:', error)
     sessionError.value = 'Failed to join session: ' + error.message
@@ -218,6 +287,12 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  // Cleanup listeners
+  if (padRef.value) {
+    padRef.value.removeEventListener('wheel', onWheel as EventListener)
+    padRef.value.removeEventListener('touchstart', onTouchStart as EventListener)
+    padRef.value.removeEventListener('touchmove', onTouchMove as EventListener)
+  }
   leaveSession()
 })
 </script>

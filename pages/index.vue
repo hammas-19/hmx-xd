@@ -23,6 +23,67 @@
       </template>
     </TheNavbar>
     <HomeHero />
+    <!-- Minimal Connection Status (Top Right) + QR Modal -->
+    <ClientOnly>
+      <!-- Connection Badge (Always Visible) -->
+      <div class="fixed top-4 right-4 z-50">
+        <div
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-sm border"
+          :class="isConnected ? 'bg-green-900/20 text-green-300 border-green-600/30' : 'bg-red-900/20 text-red-300 border-red-600/30'"
+        >
+          <span class="w-2 h-2 rounded-full" :class="isConnected ? 'bg-green-400 animate-pulse' : 'bg-red-400 animate-pulse'" />
+          {{ isConnected ? 'Ready' : 'Connecting' }}
+        </div>
+      </div>
+
+      <!-- QR Modal Popup -->
+      <Transition name="fade">
+        <div v-if="sessionShown" class="fixed inset-0 z-40 bg-black/50 flex items-center justify-center p-4">
+          <div class="bg-slate-800 border border-slate-700 rounded-lg p-8 max-w-md w-full shadow-xl">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold text-white">Scan to Control</h2>
+              <button
+                class="text-gray-400 hover:text-white transition-colors"
+                @click="sessionShown = false"
+              >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- QR Container -->
+            <div class="flex justify-center mb-6">
+              <div ref="qrContainer" class="bg-white p-4 rounded-lg" />
+            </div>
+
+            <!-- Instructions -->
+            <p class="text-xs text-gray-400 text-center mb-4">
+              Scan with your phone to open the controller
+            </p>
+
+            <!-- Fallback Link -->
+            <a
+              :href="controllerUrl"
+              target="_blank"
+              rel="noopener"
+              class="w-full block text-center px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-colors text-sm font-medium text-white"
+            >
+              Open Controller
+            </a>
+
+            <!-- Close Button -->
+            <button
+              class="w-full mt-3 px-4 py-2 rounded bg-slate-700 hover:bg-slate-600 transition-colors text-sm font-medium text-white"
+              @click="sessionShown = false"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </Transition>
+    </ClientOnly>
     <div id="work">
       <HomeLatestWork :projects="projects" />
     </div>
@@ -35,7 +96,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { useSecondScreen } from '~/composables/useSecondScreen'
 // Enhanced SEO Meta Tags
 useSeoMeta({
   title: 'Hammas Masood - Frontend Developer Portfolio',
@@ -48,6 +111,64 @@ useSeoMeta({
   twitterDescription: 'Portfolio showcasing modern web development projects built with Vue.js, Nuxt.js, and Python.',
   twitterImage: '/og-image.jpg',
   twitterCard: 'summary_large_image'
+})
+
+// SecondScreen viewer setup
+const { isConnected, joinSession, leaveSession, watchConnectionStatus, onConnected, onScrollPosition } = useSecondScreen()
+const qrContainer = ref<HTMLDivElement | null>(null)
+const sessionShown = ref(false)
+const viewerSessionId = ref('')
+const controllerUrl = computed(() => {
+  if (!viewerSessionId.value) return ''
+  if (import.meta.client) {
+    return `${window.location.origin}/controller/${viewerSessionId.value}`
+  }
+  return `/controller/${viewerSessionId.value}`
+})
+
+const genId = () => Math.random().toString(36).slice(2, 10)
+
+onMounted(() => {
+  // Create and join a session as the viewer when socket connects
+  viewerSessionId.value = genId()
+  onConnected(() => joinSession(viewerSessionId.value))
+  watchConnectionStatus()
+
+  // Apply incoming scroll positions directly to the page
+  onScrollPosition((pos: number) => {
+    if (import.meta.client) {
+      window.scrollTo({ top: Math.max(0, pos), behavior: 'auto' })
+    }
+  })
+
+  // Generate QR when toggled on
+  watch(sessionShown, async (shown) => {
+    if (!shown) return
+    await nextTick()
+    if (!qrContainer.value) {
+      console.warn('[viewer] qrContainer not found')
+      return
+    }
+    // Clear previous canvas
+    qrContainer.value.innerHTML = ''
+    try {
+      const mod = await import('qrcode')
+      const QRCode = mod.default || mod
+      const canvas = document.createElement('canvas')
+      await QRCode.toCanvas(canvas, controllerUrl.value, { width: 180 })
+      qrContainer.value.appendChild(canvas)
+      console.log('[viewer] QR generated for:', controllerUrl.value)
+    } catch (err) {
+      console.warn('[viewer] QR generation failed, fallback link only', err)
+    }
+  }, { immediate: false })
+
+  // Auto-show QR modal on mount
+  sessionShown.value = true
+})
+
+onUnmounted(() => {
+  leaveSession()
 })
 
 const projects = [
@@ -180,5 +301,15 @@ const projects = [
 <style scoped>
 .smooth-scroll {
   scroll-behavior: smooth;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
