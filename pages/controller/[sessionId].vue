@@ -9,7 +9,7 @@
       </div>
 
       <!-- Connection Status Badge & Leave Button - Fixed Top Right -->
-      <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+      <div class="fixed bottom-4 left-4 z-50 flex items-center gap-3">
         <div
           class="flex items-center gap-2.5 px-4 py-2 rounded-2xl backdrop-blur-xl border transition-all duration-300"
           :class="isConnected ? 'bg-bubbles/10 border-bubbles/30' : 'bg-red-500/10 border-red-500/30'"
@@ -64,18 +64,7 @@
               Session: <span class="font-mono text-bubbles">{{ sessionId }}</span>
             </p>
           </div>
-
-          <!-- To Top Button -->
-          <button
-            class="w-full px-6 py-4 rounded-2xl bg-bubbles/10 hover:bg-bubbles/20 border border-bubbles/30 hover:border-bubbles/50 transition-all font-semibold text-bubbles hover:shadow-[0_0_35px_rgba(195,252,177,0.25)] flex items-center justify-center gap-3"
-            @click="scrollToTop"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-            Scroll to Top
-          </button>
-
+          
           <!-- Virtual Scroll Pad (infinite control) -->
           <div class="relative w-full">
             <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-bubbles/10 via-bubbles/5 to-transparent blur-3xl pointer-events-none" />
@@ -122,6 +111,15 @@
               </div>
             </div>
           </div>
+          <!-- To Top Button -->
+          <button
+            class="w-full px-6 py-4 rounded-2xl bg-bubbles/10 hover:bg-bubbles/20 border border-bubbles/30 hover:border-bubbles/50 transition-all font-semibold text-bubbles hover:shadow-[0_0_35px_rgba(195,252,177,0.25)] flex items-center justify-center gap-3"
+            @click="scrollToTop">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            Scroll to Top
+          </button>
         </div>
       </div>
     </ClientOnly>
