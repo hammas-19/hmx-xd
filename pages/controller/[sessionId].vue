@@ -1,126 +1,124 @@
 <!-- Mobile controller page - controls the scroll position of the desktop viewer -->
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white flex flex-col">
+  <div class="min-h-screen bg-gradient-to-br from-[#0b0b0f] via-boss to-[#0b0b0f] text-white flex flex-col">
     <!-- Connection Status Header -->
     <ClientOnly>
-      <div
-        class="sticky top-0 z-50 px-4 py-3 transition-colors duration-300 border-b"
-        :class="isConnected ? 'bg-green-900/30 border-green-500/30' : 'bg-red-900/30 border-red-500/30'"
-      >
-        <div class="flex items-center justify-between max-w-4xl mx-auto">
-          <div class="flex items-center gap-2">
+      <!-- Logo - Fixed Top Left -->
+      <div class="fixed top-4 left-4 z-50">
+        <img src="/home/signLogo.png" class="w-[43px] h-fit px-2 py-[3px]" alt="Hammas Masood">
+      </div>
+
+      <!-- Connection Status Badge & Leave Button - Fixed Top Right -->
+      <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <div
+          class="flex items-center gap-2.5 px-4 py-2 rounded-2xl backdrop-blur-xl border transition-all duration-300"
+          :class="isConnected ? 'bg-bubbles/10 border-bubbles/30' : 'bg-red-500/10 border-red-500/30'"
+        >
+          <div class="relative">
             <div
-              class="w-3 h-3 rounded-full animate-pulse"
-              :class="isConnected ? 'bg-green-500' : 'bg-red-500'"
+              class="w-2 h-2 rounded-full animate-pulse"
+              :class="isConnected ? 'bg-bubbles' : 'bg-red-400'"
             />
-            <span class="text-sm font-medium">
-              {{ isConnected ? 'Connected to Session' : 'Disconnecting...' }}
-            </span>
+            <div
+              class="absolute inset-0 w-2 h-2 rounded-full animate-ping opacity-75"
+              :class="isConnected ? 'bg-bubbles' : 'bg-red-400'"
+            />
           </div>
-          <button
-            class="text-xs px-3 py-1 rounded bg-red-600 hover:bg-red-700 transition-colors font-medium"
-            @click="handleLeaveSession"
-          >
-            Leave
-          </button>
+          <span class="text-xs font-semibold font-doto tracking-wide" :class="isConnected ? 'text-bubbles' : 'text-red-400'">
+            {{ isConnected ? 'LIVE' : 'CONNECTING' }}
+          </span>
         </div>
+        <button
+          class="px-4 py-2 rounded-2xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 hover:border-red-500/50 transition-all text-xs font-semibold text-red-400"
+          @click="handleLeaveSession"
+        >
+          Leave
+        </button>
       </div>
 
       <!-- Error State -->
-      <div v-if="sessionError" class="fixed inset-0 z-40 bg-black/80 flex items-center justify-center p-4">
-        <div class="bg-red-900/20 border border-red-500 rounded-lg p-6 max-w-md w-full">
-          <h2 class="text-xl font-bold mb-4">Connection Error</h2>
-          <p class="text-red-100 mb-6">{{ sessionError }}</p>
-          <NuxtLink
-            to="/"
-            class="w-full block text-center px-4 py-2 rounded bg-red-600 hover:bg-red-700 transition-colors font-medium"
-          >
-            Go Home
-          </NuxtLink>
+      <div v-if="sessionError" class="fixed inset-0 z-40 bg-boss/70 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-md">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-red-500/20 via-red-500/5 to-transparent blur-3xl pointer-events-none" />
+          <div class="relative bg-[#0b0b0f]/90 border border-red-500/30 rounded-3xl p-8 ">
+            <h2 class="text-2xl font-bold font-doto mb-4 text-red-400">Connection Error</h2>
+            <p class="text-white/80 mb-6 leading-relaxed">{{ sessionError }}</p>
+            <NuxtLink
+              to="/"
+              class="w-full block text-center px-4 py-3 rounded-2xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 hover:border-red-500/50 transition-all font-semibold"
+            >
+              Go Home
+            </NuxtLink>
+          </div>
         </div>
       </div>
 
       <!-- Main Content -->
-      <div v-if="!sessionError" class="flex-1 flex flex-col items-center justify-center px-4">
-        <div class="max-w-sm w-full">
+      <div v-if="!sessionError" class="flex-1 flex flex-col items-center justify-center px-4 py-8">
+        <div class="max-w-lg w-full space-y-6">
           <!-- Title -->
-          <h1 class="text-3xl font-bold text-center mb-2">Scroll Controller</h1>
-          <p class="text-gray-400 text-center text-sm mb-8">
-            Session: <span class="font-mono text-blue-300">{{ sessionId }}</span>
-          </p>
-
-          <!-- Instructions -->
-          <div class="bg-slate-700/50 rounded-lg p-6 mb-8 border border-slate-600">
-            <h2 class="text-lg font-semibold mb-4">Instructions</h2>
-            <ol class="space-y-3 text-sm text-gray-300">
-              <li class="flex gap-3">
-                <span class="font-bold text-blue-400">1</span>
-                <span>Scroll up or down on this page</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="font-bold text-blue-400">2</span>
-                <span>Watch the desktop page scroll in real-time</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="font-bold text-blue-400">3</span>
-                <span>Multiple controllers can connect to the same session</span>
-              </li>
-            </ol>
-          </div>
-
-          <!-- Scroll Position Display -->
-          <div class="bg-slate-700/50 rounded-lg p-6 border border-slate-600 mb-8">
-            <p class="text-gray-400 text-sm mb-2">Current Scroll Position</p>
-            <div class="text-5xl font-bold font-mono text-blue-400">{{ Math.round(currentScrollPosition) }}</div>
-            <p class="text-gray-500 text-xs mt-2">pixels from top</p>
-          </div>
-
-          <!-- Scroll Simulator -->
-          <div class="bg-slate-700/50 rounded-lg p-6 border border-slate-600">
-            <p class="text-gray-400 text-sm mb-4">Or use manual control</p>
-            <div class="space-y-3">
-              <button
-                class="w-full px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold"
-                @click="quickScroll(-500)"
-              >
-                ⬆️ Scroll Up (500px)
-              </button>
-              <button
-                class="w-full px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors font-semibold"
-                @click="quickScroll(500)"
-              >
-                ⬇️ Scroll Down (500px)
-              </button>
-              <button
-                class="w-full px-4 py-3 rounded-lg bg-slate-600 hover:bg-slate-500 transition-colors font-semibold text-sm"
-                @click="scrollToTop"
-              >
-                To Top
-              </button>
-            </div>
-          </div>
-
-          <!-- Status Info -->
-          <div class="mt-8 p-4 rounded-lg bg-slate-800/50 border border-slate-600">
-            <p class="text-xs text-gray-400 text-center">
-              This page acts as a controller. Open the desktop page to see it scroll.
+          <div class="text-center space-y-2">
+            <p class="text-xs uppercase tracking-[0.2em] text-bubbles font-doto">Second Screen Controller</p>
+            <h1 class="text-4xl font-black font-doto text-white">Remote Control</h1>
+            <p class="text-white/50 text-sm">
+              Session: <span class="font-mono text-bubbles">{{ sessionId }}</span>
             </p>
           </div>
 
+          <!-- To Top Button -->
+          <button
+            class="w-full px-6 py-4 rounded-2xl bg-bubbles/10 hover:bg-bubbles/20 border border-bubbles/30 hover:border-bubbles/50 transition-all font-semibold text-bubbles hover:shadow-[0_0_35px_rgba(195,252,177,0.25)] flex items-center justify-center gap-3"
+            @click="scrollToTop"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            Scroll to Top
+          </button>
+
           <!-- Virtual Scroll Pad (infinite control) -->
-          <div class="mt-8 p-4 rounded-lg bg-slate-800/50 border border-slate-600">
-            <p class="text-sm text-gray-300 mb-4 font-semibold">Scroll Pad</p>
-            <p class="text-xs text-gray-400 mb-3">Use this pad to drive the desktop page. It captures wheel/touch without local limits.</p>
-            <div
-              ref="padRef"
-              class="relative rounded-lg border border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 h-[60vh] select-none cursor-grab"
-              tabindex="0"
-              style="touch-action: none; overscroll-behavior: contain;"
-            >
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.04),transparent_35%),radial-gradient(circle_at_20%_60%,rgba(59,130,246,0.07),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(56,189,248,0.06),transparent_35%)]" />
-              <div class="absolute top-2 left-2 right-2 flex items-center justify-between px-4 py-2 text-[11px] text-gray-400 bg-slate-900/50 backdrop-blur-sm border border-slate-700/60 rounded">
-                <span>Scroll or drag here to send updates</span>
-                <span class="font-mono text-blue-300">{{ Math.round(currentScrollPosition) }} px</span>
+          <div class="relative w-full">
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-bubbles/10 via-bubbles/5 to-transparent blur-3xl pointer-events-none" />
+            <div class="relative bg-[#0b0b0f]/80 border border-white/10 rounded-3xl overflow-hidden">
+              <div class="h-1 w-full bg-gradient-to-r from-boss via-bubbles to-boss" />
+              
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-bubbles/70 mb-1 font-doto">Control Pad</p>
+                    <h2 class="text-lg font-bold text-white">Scroll or Drag</h2>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xs text-white/50 mb-1">Position</p>
+                    <p class="text-2xl font-mono font-bold text-bubbles">{{ Math.round(currentScrollPosition) }}</p>
+                  </div>
+                </div>
+
+                <div
+                  ref="padRef"
+                  class="relative rounded-2xl border border-white/10 bg-gradient-to-b from-boss/50 to-boss/80 h-[50vh] min-h-[400px] select-none cursor-grab active:cursor-grabbing overflow-hidden"
+                  tabindex="0"
+                  style="touch-action: none; overscroll-behavior: contain;"
+                >
+                  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(195,252,177,0.08),transparent_40%),radial-gradient(circle_at_20%_60%,rgba(195,252,177,0.05),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(195,252,177,0.06),transparent_40%)]" />
+                  
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="text-center space-y-3">
+                      <div class="inline-flex p-4 rounded-full bg-bubbles/10 border border-bubbles/30">
+                        <svg class="w-8 h-8 text-bubbles" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                        </svg>
+                      </div>
+                      <p class="text-sm font-semibold text-white/70">Scroll or drag here</p>
+                      <p class="text-xs text-white/50">Controls the desktop page in real-time</p>
+                    </div>
+                  </div>
+
+                  <div class="absolute bottom-4 left-4 right-4 px-4 py-2 text-xs text-white/50 bg-boss/60 backdrop-blur-sm border border-white/10 rounded-xl flex items-center justify-between">
+                    <span>Touch & Wheel Enabled</span>
+                    <span class="font-mono text-bubbles">{{ Math.round(currentScrollPosition) }}px</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

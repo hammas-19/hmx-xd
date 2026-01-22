@@ -25,62 +25,96 @@
     <HomeHero />
     <!-- Minimal Connection Status (Top Right) + QR Modal -->
     <ClientOnly>
-      <!-- Connection Badge (Always Visible) -->
-      <div class="fixed top-4 right-4 z-50">
+      <!-- Connection Badge & Toggle Button -->
+      <div class="fixed md:top-4 top-20 right-4 z-50 flex flex-col gap-3 items-end">
+        <!-- Connection Status Badge (Only show when NOT connected) -->
         <div
-          class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-sm border"
-          :class="isConnected ? 'bg-green-900/20 text-green-300 border-green-600/30' : 'bg-red-900/20 text-red-300 border-red-600/30'"
+          v-if="!isConnected"
+          class="group flex items-center gap-2.5 px-4 py-2 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 bg-red-500/10 border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.15)]"
         >
-          <span class="w-2 h-2 rounded-full" :class="isConnected ? 'bg-green-400 animate-pulse' : 'bg-red-400 animate-pulse'" />
-          {{ isConnected ? 'Ready' : 'Connecting' }}
+          <div class="relative">
+            <span class="block w-2 h-2 rounded-full animate-pulse bg-red-400" />
+            <span class="absolute inset-0 w-2 h-2 rounded-full animate-ping opacity-75 bg-red-400" />
+          </div>
+          <span class="text-xs font-semibold font-doto tracking-wide text-red-400">
+            CONNECTING
+          </span>
         </div>
+
+        <!-- Toggle QR Modal Button (Only show when modal is NOT open) -->
+        <button
+          v-if="!sessionShown"
+          data-pointer="open"
+          @click="sessionShown = true"
+          class="group relative flex items-center justify-center w-12 h-12 rounded-2xl bg-boss/80 backdrop-blur-xl border border-white/10 hover:border-bubbles/50 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_25px_rgba(195,252,177,0.3)]"
+        >
+          <svg class="w-5 h-5 text-white group-hover:text-bubbles transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 7h.01M7 12h.01M7 17h.01M12 7h.01M12 12h.01M12 17h.01M17 7h.01M17 12h.01M17 17h.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- Tooltip -->
+          <span class="absolute right-full mr-3 px-3 py-1.5 bg-boss text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Open Controller
+          </span>
+        </button>
       </div>
 
       <!-- QR Modal Popup -->
       <Transition name="fade">
-        <div v-if="sessionShown" class="fixed inset-0 z-40 bg-black/50 flex items-center justify-center p-4">
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-8 max-w-md w-full shadow-xl">
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-xl font-bold text-white">Scan to Control</h2>
-              <button
-                class="text-gray-400 hover:text-white transition-colors"
-                data-pointer="close"
-                @click="sessionShown = false"
-              >
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+        <div v-if="sessionShown" class="fixed inset-0 z-40 bg-boss/40 backdrop-blur-md flex items-center justify-center p-4">
+          <div class="relative w-full max-w-md">
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-transparent blur-3xl pointer-events-none" />
+            <div class="relative bg-[#0b0b0f] border border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.45)] overflow-hidden">
+              <div class="h-1 w-full bg-gradient-to-r from-[#1a1a1a] via-[#c3fcb1] to-[#1a1a1a]" />
+
+              <div class="p-8 space-y-6">
+                <!-- Modal Header -->
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-bubbles mb-1">Control via Phone?</p>
+                    <h2 class="text-2xl font-semibold text-white">Scan to Connect</h2>
+                  </div>
+                  <button
+                    class="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:border-white/40 transition"
+                    data-pointer="close"
+                    @click="sessionShown = false"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- QR Container -->
+                <div class="flex justify-center">
+                  <div ref="qrContainer" class="bg-white p-4 rounded-2xl shadow-inner shadow-black/20" />
+                </div>
+
+                <!-- Instructions -->
+                <p class="text-sm text-white text-center leading-relaxed">
+                  Pair your phone as a controller instantly, just scan the QR code. No setup needed.
+                </p>
+
+                <!-- Actions -->
+                <!-- <div class="space-y-3">
+                  <a
+                    :href="controllerUrl"
+                    target="_blank"
+                    rel="noopener"
+                    class="w-full block text-center px-4 py-3 rounded-2xl bg-gradient-to-r from-[#2582F6] to-[#0f5ad4] hover:from-[#2f8dff] hover:to-[#1a5be8] transition-colors text-sm font-semibold text-white shadow-[0_10px_30px_rgba(37,130,246,0.3)]"
+                  >
+                    Open Controller
+                  </a>
+
+                  <button
+                    class="w-full px-4 py-3 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold text-white"
+                    @click="sessionShown = false"
+                  >
+                    Close
+                  </button>
+                </div> -->
+              </div>
             </div>
-
-            <!-- QR Container -->
-            <div class="flex justify-center mb-6">
-              <div ref="qrContainer" class="bg-white p-4 rounded-lg" />
-            </div>
-
-            <!-- Instructions -->
-            <p class="text-xs text-gray-400 text-center mb-4">
-              Scan with your phone to open the controller
-            </p>
-
-            <!-- Fallback Link -->
-            <a
-              :href="controllerUrl"
-              target="_blank"
-              rel="noopener"
-              class="w-full block text-center px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-colors text-sm font-medium text-white"
-            >
-              Open Controller
-            </a>
-
-            <!-- Close Button -->
-            <button
-              class="w-full mt-3 px-4 py-2 rounded bg-slate-700 hover:bg-slate-600 transition-colors text-sm font-medium text-white"
-              @click="sessionShown = false"
-            >
-              Close
-            </button>
           </div>
         </div>
       </Transition>
