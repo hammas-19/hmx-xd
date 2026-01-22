@@ -1,4 +1,12 @@
 <template>
+  <!-- Icon preloader - hidden div to cache icons on mount -->
+  <div v-if="!iconsPreloaded" class="icon-preloader">
+    <Icon name="pixelarticons:arrow-right" />
+    <Icon name="pixelarticons:human-handsup" />
+    <Icon name="pixelarticons:scale" />
+    <Icon name="pixelarticons:viewport-narrow" />
+  </div>
+
   <motion.div ref="elementRef" class="pointer-follower"
     :class="[`pointer-${currentState}`, { 'pointer-hidden': !isVisible }]" :style="{ x, y }">
     <!-- Default pointer -->
@@ -35,7 +43,7 @@
     </div>
 
     <!-- Text pointer -->
-    <div v-else-if="currentState === 'text'" class="pointer-text">
+    <div v-else-if="currentState === 'text'" class="pointer-text font-doto">
       {{ customText }}
     </div>
   </motion.div>
@@ -43,7 +51,7 @@
 
 <script setup>
 import { frame, motion, useMotionValue, useSpring } from "motion-v"
-import { ref, onMounted, onUnmounted, computed } from "vue"
+import { ref, onMounted, onUnmounted, computed, nextTick } from "vue"
 
 // Props
 const props = defineProps({
@@ -83,6 +91,7 @@ const currentState = ref('default')
 const customText = ref('Click me!')
 const isVisible = ref(true)
 const currentHoveredElement = ref(null)
+const iconsPreloaded = ref(false)
 
 // Spring config based on props
 const springConfig = computed(() => ({
@@ -159,6 +168,11 @@ const handleGlobalMouseMove = (event) => {
 
 // Lifecycle
 onMounted(() => {
+  // Preload icons by rendering them, then hide after a frame
+  nextTick(() => {
+    iconsPreloaded.value = true
+  })
+
   window.addEventListener("pointermove", handlePointerMove)
   window.addEventListener("mousemove", handleGlobalMouseMove)
   document.addEventListener("mouseenter", handleMouseEnter, true)
@@ -174,6 +188,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.icon-preloader {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
 .pointer-follower {
   position: fixed;
   top: 0;
@@ -229,11 +251,11 @@ onUnmounted(() => {
 }
 
 .pointer-text {
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.9);
+  padding: 4px 8px;
+  background: black;
   border-radius: 20px;
-  color: white;
-  font-size: 12px;
+  color: #c3fcb1;
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
 }

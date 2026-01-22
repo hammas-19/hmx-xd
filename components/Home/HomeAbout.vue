@@ -13,7 +13,7 @@
         <p class="text-white">
           Currently based in Karachi, Pakistan, I began my journey into coding in 2021 while pursuing a Bachelor's in
           Computer Science, graduating in 2024. I'm focused on developing with Vue/Nuxt and Tailwind, but I am also
-          proficient in React, HTML, CSS, and JavaScript.
+          proficient in React, Next.js, HTML, CSS, and JavaScript.
           <br> <br>
           I am passionate about creating user-friendly, responsive websites and applications. My strengths include
           effective communication, problem-solving, and working collaboratively with teams to deliver impactful

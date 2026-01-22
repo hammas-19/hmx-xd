@@ -18,7 +18,7 @@
         y: -10,
         scale: 1.02,
       }" :while-tap="{ scale: 0.98 }" :viewport="{ once: true }" class="flex justify-center items-center">
-        <div class="w-full relative">
+        <div class="w-full relative cursor-pointer" data-pointer="open" @click="openModal(project)">
           <div class="w-full h-full absolute inset-0 top-conic md:rounded-[50px] rounded-[35px]" />
           <div
             class="border-4 md:rounded-[50px] rounded-[35px] border-black w-full bg-[#ffffff] hover:bg-transparent  backdrop-blur-sm overflow-hidden">
@@ -32,7 +32,7 @@
                   </div>
                 </div>
                 <!-- Arrow Button with click handler -->
-                <button data-pointer="open"
+                <button
                   class="group relative flex size-10 items-center justify-center gap-1 rounded-lg w-full max-w-[40px] hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
                   @click="openModal(project)">
                   <div class="size-1 rounded-full bg-black duration-300 group-hover:opacity-0" />
