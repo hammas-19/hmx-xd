@@ -1,19 +1,25 @@
+/* Font import must be FIRST before all other statements */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Doto:wght@400;500;600;700&family=Syne:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap');
+
 /* Import Tailwind CSS v4 */
 @import "tailwindcss";
 
 /* Import theme */
 @import "./theme.css";
 
-/* Default Styling */
-* {
-  scroll-behavior: smooth;
-}
+/* Optimize font loading - use system fonts immediately */
 body {
-  font-family: var(--font-outfit);
+  font-family: var(--font-outfit), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--color-darkLiver);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-display: swap;
+}
+
+/* Default Styling */
+* {
+  scroll-behavior: smooth;
 }
 .top-conic {
   background: radial-gradient(ellipse at top, #c3fcb1, #edfae9, #fcfcfc);

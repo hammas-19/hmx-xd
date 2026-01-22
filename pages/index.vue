@@ -45,6 +45,7 @@
               <h2 class="text-xl font-bold text-white">Scan to Control</h2>
               <button
                 class="text-gray-400 hover:text-white transition-colors"
+                data-pointer="close"
                 @click="sessionShown = false"
               >
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,7 +176,7 @@ const projects = [
   {
     name: 'Codes Hawk',
     logo: '/projects/codesHawk/logo.jpeg',
-    description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions that propel your business forward.',
+    description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions to drive your business forward. We also offer expert web and mobile software engineering, along with SEO services to enhance your online presence, attract more traffic, and boost conversions. Trust us to help you achieve digital success.',
     achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio'],
     images: [
       '/projects/codesHawk/1.jpg',
