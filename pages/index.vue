@@ -27,18 +27,19 @@
     <ClientOnly>
       <!-- Connection Badge & Toggle Button -->
       <div class="fixed md:top-4 top-20 right-4 z-50 flex flex-col gap-3 items-end">
-        <!-- Connection Status Badge (Only show when NOT connected) -->
-        <div
-          v-if="!isConnected"
-          class="group flex items-center gap-2.5 px-4 py-2 rounded-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 bg-red-500/10 border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.15)]"
-        >
-          <div class="relative">
-            <span class="block w-2 h-2 rounded-full animate-pulse bg-red-400" />
-            <span class="absolute inset-0 w-2 h-2 rounded-full animate-ping opacity-75 bg-red-400" />
+        <!-- Connection Status Badge -->
+        <div class="flex flex-col items-center gap-[2px]">
+          <div class="loader" :class="{ 'connected': isConnected }">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm56 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z">
+              </path>
+            </svg>
+            <span></span>
           </div>
-          <span class="text-xs font-semibold font-doto tracking-wide text-red-400">
-            CONNECTING
-          </span>
+          <p class="text-xs font-doto !text-[#000000]">
+            {{ isConnected ? 'Connected' : 'Connecting' }}
+          </p>
         </div>
 
         <!-- Toggle QR Modal Button (Only show when modal is NOT open) -->
@@ -86,13 +87,21 @@
                 </div>
 
                 <!-- QR Container -->
-                <div class="flex justify-center">
+                <div v-if="!isConnected" class="flex justify-center">
                   <div ref="qrContainer" class="bg-white p-4 rounded-2xl shadow-inner shadow-black/20" />
                 </div>
-
+                
+                <!-- Success Animation -->
+                <div v-if="isConnected" class="success-animation">
+                  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                  </svg>
+                </div>
+                
                 <!-- Instructions -->
                 <p class="text-sm text-white text-center leading-relaxed">
-                  Pair your phone as a controller instantly, just scan the QR code. No setup needed.
+                  {{ isConnected ? 'Connected successfully! Closing...' : 'Pair your phone as a controller instantly, just scan the QR code. No setup needed.' }}
                 </p>
 
                 <!-- Actions -->
@@ -133,6 +142,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import ConnectingLoader from '~/components/Home/ConnectingLoader.vue'
 import { useSecondScreen } from '~/composables/useSecondScreen'
 // Enhanced SEO Meta Tags
 useSeoMeta({
@@ -197,6 +207,15 @@ onMounted(() => {
       console.warn('[viewer] QR generation failed, fallback link only', err)
     }
   }, { immediate: false })
+
+  // Watch connection status and auto-close modal after 2 seconds on successful connection
+  watch(isConnected, (connected) => {
+    if (connected && sessionShown.value) {
+      setTimeout(() => {
+        sessionShown.value = false
+      }, 2000)
+    }
+  })
 
   // Auto-show QR modal on mount
   sessionShown.value = true
@@ -347,4 +366,124 @@ const projects = [
 .fade-leave-to {
   opacity: 0;
 }
+
+/* comlpete animation */
+/* .success-animation { margin:150px auto;} */
+
+.checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #c3fcb1;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #c3fcb1;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    position:relative;
+    top: 5px;
+    right: 5px;
+   margin: 0 auto;
+}
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #c3fcb1;
+    fill: #ffffff00;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+ 
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #c2fcb100;
+    }
+}
+
+/* connecting state */
+.loader {
+    --color: #131313;
+    --size: 40px;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    transition: all 0.3s ease;
+  }
+
+  .loader span {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid var(--color);
+    border-bottom: 1px solid transparent;
+    border-radius: 100%;
+    animation: keyframes-rotate .8s infinite linear;
+    transition: opacity 0.3s ease;
+  }
+
+  .loader svg {
+    width: 100%;
+    height: 100%;
+    padding: 25%;
+    fill: var(--color);
+    animation: keyframes-blink .8s infinite ease-in-out;
+    transition: fill 0.3s ease;
+  }
+
+  /* Connected state - green and no animation */
+  .loader.connected {
+    --color: #c3fcb1;
+    background-color: #000000;
+    border-radius: 100%;
+  }
+
+  .loader.connected span {
+    animation: none;
+    opacity: 0;
+  }
+
+  .loader.connected svg {
+    animation: none;
+    opacity: 1;
+    fill: #c3fcb1;
+  }
+
+  @keyframes keyframes-rotate {
+    0% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes keyframes-blink {
+    50% {
+      opacity: 0.8;
+    }
+  }
 </style>
