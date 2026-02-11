@@ -23,8 +23,23 @@ export const useSecondScreen = () => {
 
   const sessionId = ref<string>('')
   const isConnected = ref(false)
+  const isSocketConnected = ref(false)
   const participantCount = ref(0)
+  const controllers = ref(0)
+  const viewers = ref(0)
   const isScrolling = ref(false)
+
+  const updateSessionStatus = (data: {
+    participantCount?: number
+    controllers?: number
+    viewers?: number
+  }) => {
+    controllers.value = Number(data.controllers ?? controllers.value ?? 0)
+    viewers.value = Number(data.viewers ?? viewers.value ?? 0)
+    const countFromRoles = controllers.value + viewers.value
+    participantCount.value = Number(data.participantCount ?? countFromRoles ?? 0)
+    isConnected.value = participantCount.value >= 2
+  }
 
   /**
    * Generate a unique session ID using crypto API
@@ -145,16 +160,24 @@ export const useSecondScreen = () => {
    */
   const watchConnectionStatus = () => {
     socket.on('connect', () => {
-      isConnected.value = true
+      isSocketConnected.value = true
     })
 
     socket.on('disconnect', () => {
+      isSocketConnected.value = false
       isConnected.value = false
       participantCount.value = 0
+      controllers.value = 0
+      viewers.value = 0
     })
 
     socket.on('participant-count', (count: number) => {
       participantCount.value = count
+      isConnected.value = count >= 2
+    })
+
+    socket.on('session-status', (data: { participantCount?: number; controllers?: number; viewers?: number }) => {
+      updateSessionStatus(data)
     })
   }
 
@@ -166,7 +189,10 @@ export const useSecondScreen = () => {
   return {
     sessionId,
     isConnected,
+    isSocketConnected,
     participantCount,
+    controllers,
+    viewers,
     isScrolling,
     generateSessionId,
     joinSession,
