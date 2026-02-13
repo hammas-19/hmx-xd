@@ -142,7 +142,6 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import ConnectingLoader from '~/components/Home/ConnectingLoader.vue'
 import { useSecondScreen } from '~/composables/useSecondScreen'
 // Enhanced SEO Meta Tags
 useSeoMeta({
@@ -296,9 +295,9 @@ const projects = [
     tailwind: true,
     python: true,
     type: 'Progressive Web App',
-    status: 'On stage',
+    status: 'Completed',
     duration: '45 Days',
-    link: 'https://stage-jobportal.alnafi.com/',
+    link: 'https://jobportal.alnafi.com/',
   },
   {
     name: 'College',
@@ -321,9 +320,9 @@ const projects = [
     tailwind: true,
     python: true,
     type: 'E-Learning',
-    status: 'On stage',
+    status: 'Completed',
     duration: '25 Days',
-    link: 'https://stage-islamic.alnafi.com/',
+    link: 'https://islamic.alnafi.com/',
   },
   {
     name: 'Rechik',
