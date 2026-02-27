@@ -226,6 +226,35 @@ onUnmounted(() => {
 
 const projects = [
   {
+    name: 'Art Agency',
+    // logo: '/projects/codesHawk/logo.jpeg',
+    description: 'WE CRAFT STRATEGIC, CREATIVE SOLUTIONS THAT COMBINE SMART IDEAS WITH STUNNING, FUNCTIONAL DESIGN. BY OBSESSING OVER THE DETAILS, WE INSPIRE ACTION AND DELIVER MEASURABLE RESULTS, EMPOWERING BRANDS TO THRIVE IN A DYNAMIC, EVER-EVOLVING MARKETPLACE.',
+    achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio'],
+    images: [
+      '/projects/dotAgency/1.png',
+      '/projects/dotAgency/2.png',
+      '/projects/dotAgency/3.png',
+      '/projects/dotAgency/4.png',
+      '/projects/dotAgency/5.png',
+      '/projects/dotAgency/6.png'
+    ],
+    inProgress: true,
+    javascript: true,
+    netlify: true,
+    lenis: true,
+    github: true,
+    nuxt: true,
+    vuejs: true,
+    gsap: true,
+    framer: true,
+    css: true,
+    tailwind: true,
+    type: 'Portfolio',
+    status: 'On stage',
+    duration: '---',
+    link: 'https://codeshawk.com/',
+  },
+  {
     name: 'Codes Hawk',
     logo: '/projects/codesHawk/logo.jpeg',
     description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions to drive your business forward. We also offer expert web and mobile software engineering, along with SEO services to enhance your online presence, attract more traffic, and boost conversions. Trust us to help you achieve digital success.',

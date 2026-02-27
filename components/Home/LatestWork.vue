@@ -26,9 +26,19 @@
               <div class="flex justify-between">
                 <div class="flex flex-col gap-10">
                   <div class="flex items-center gap-5">
-                    <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl p-2" :alt="project.name">
-                    <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{
-                      project.name }}</span>
+                    <template v-if="project.logo">
+                      <img :src="project.logo" class="h-12 w-fit object-cover rounded-xl p-2" :alt="project.name">
+                    </template>
+                    <template v-else>
+                      <div class="h-12 w-12 flex items-center justify-center rounded-xl p-2 bg-gray-200 text-black font-bold text-xl uppercase">
+                        {{ project.name ? project.name[0] : '?' }}
+                      </div>
+                    </template>
+                    <div class="flex gap-2 flex-col">
+                    <span v-if="project.inProgress" class="bg-[#f7c44c] w-fit px-2.5 py-0.5 text-xs rounded-full">Work In-progress</span>
+                      <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{
+                        project.name }}</span>
+                      </div>
                   </div>
                 </div>
                 <!-- Arrow Button with click handler -->
@@ -52,7 +62,7 @@
               <!-- Dynamic Data -->
               <div
                 class="md:min-h-[300px] bg-boss md:rounded-tr-[40px] rounded-tr-[20px] flex flex-col justify-end p-5 sm:gap-10 gap-5">
-                <p class="text-white sm:text-xl text-xs font-medium line-clamp-3">
+                <p class="text-white sm:text-xl text-xs font-medium line-clamp-3 uppercase">
                   {{ project.description }}
                 </p>
                 <div class="flex flex-wrap gap-3">
@@ -74,6 +84,11 @@
                     <Icon name="lucide:github"
                       class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
                   </div>
+                  <div v-if="project.lenis"
+                    class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                    <Icon name="carbon:smoothing-cursor"
+                      class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
+                  </div>
                   <div v-if="project.nuxt" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                     <Icon name="lineicons:nuxt"
                       class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
@@ -91,6 +106,11 @@
                   <div v-if="project.python"
                     class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                     <Icon name="proicons:python"
+                      class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
+                  </div>
+                  <div v-if="project.gsap"
+                    class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                    <Icon name="simple-icons:gsap"
                       class="md:min-h-[40px] min-h-[25px] md:min-w-[40px] min-w-[25px] text-bubbles" />
                   </div>
                   <div v-if="project.javascript"
