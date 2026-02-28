@@ -1,4 +1,5 @@
 /* Font import must be FIRST before all other statements */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Doto:wght@400;500;600;700&family=Syne:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap');
 
 /* Import Tailwind CSS v4 */
@@ -13,10 +14,21 @@ body {
   color: var(--color-darkLiver);
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-display: swap;
 }
 
+/* Bodoni Moda italic font class */
+
+.head-italic {
+  font-family: "Bodoni Moda", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Global box-sizing and font-display */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 /* Default Styling */
 * {
   scroll-behavior: smooth;
