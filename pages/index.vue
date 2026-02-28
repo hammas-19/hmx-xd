@@ -229,7 +229,7 @@ const projects = [
     name: 'Art Agency',
     // logo: '/projects/codesHawk/logo.jpeg',
     description: 'WE CRAFT STRATEGIC, CREATIVE SOLUTIONS THAT COMBINE SMART IDEAS WITH STUNNING, FUNCTIONAL DESIGN. BY OBSESSING OVER THE DETAILS, WE INSPIRE ACTION AND DELIVER MEASURABLE RESULTS, EMPOWERING BRANDS TO THRIVE IN A DYNAMIC, EVER-EVOLVING MARKETPLACE.',
-    achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio'],
+    achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio', 'GSAP Animations', 'Backend Integration'],
     images: [
       '/projects/dotAgency/1.png',
       '/projects/dotAgency/2.png',
@@ -252,7 +252,7 @@ const projects = [
     type: 'Portfolio',
     status: 'On stage',
     duration: '---',
-    link: 'https://codeshawk.com/',
+    link: 'https://artdotagency.netlify.app/',
   },
   {
     name: 'Codes Hawk',
