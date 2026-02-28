@@ -1434,6 +1434,11 @@
   resolved "https://registry.npmjs.org/@speed-highlight/core/-/core-1.2.7.tgz"
   integrity sha512-0dxmVj4gxg3Jg879kvFS/msl4s9F3T9UXC1InxgOf7t5NvcPD97u/WTA5vL/IxWHMn7qSxBozqrnnE2wvl1m8g==
 
+"@studio-freight/lenis@^1.0.42":
+  version "1.0.42"
+  resolved "https://registry.npmjs.org/@studio-freight/lenis/-/lenis-1.0.42.tgz"
+  integrity sha512-HJAGf2DeM+BTvKzHv752z6Z7zy6bA643nZM7W88Ft9tnw2GsJSp6iJ+3cekjyMIWH+cloL2U9X82dKXgdU8kPg==
+
 "@stylistic/eslint-plugin@^4.2.0":
   version "4.4.1"
   resolved "https://registry.npmjs.org/@stylistic/eslint-plugin/-/eslint-plugin-4.4.1.tgz"

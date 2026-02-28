@@ -163,7 +163,7 @@
             </Motion>
 
             <!-- Scrollable Content -->
-            <div class="h-full overflow-y-auto">
+            <div class="h-full overflow-y-scroll">
               <Motion :initial="{ y: 50, opacity: 0 }" :animate="{ y: 0, opacity: 1 }" :exit="{ y: -30, opacity: 0 }"
                 :transition="{ duration: 0.6, delay: 0.1, ease: 'easeOut' }" class="p-5 md:p-12 lg:p-16">
                 <!-- Modal Header -->
