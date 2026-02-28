@@ -226,6 +226,7 @@ onUnmounted(() => {
 
 const projects = [
   {
+    slug: 'art-agency',
     name: 'Art Agency',
     // logo: '/projects/codesHawk/logo.jpeg',
     description: 'WE CRAFT STRATEGIC, CREATIVE SOLUTIONS THAT COMBINE SMART IDEAS WITH STUNNING, FUNCTIONAL DESIGN. BY OBSESSING OVER THE DETAILS, WE INSPIRE ACTION AND DELIVER MEASURABLE RESULTS, EMPOWERING BRANDS TO THRIVE IN A DYNAMIC, EVER-EVOLVING MARKETPLACE.',
@@ -255,6 +256,7 @@ const projects = [
     link: 'https://artdotagency.netlify.app/',
   },
   {
+    slug: 'codes-hawk',
     name: 'Codes Hawk',
     logo: '/projects/codesHawk/logo.jpeg',
     description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions to drive your business forward. We also offer expert web and mobile software engineering, along with SEO services to enhance your online presence, attract more traffic, and boost conversions. Trust us to help you achieve digital success.',
@@ -280,6 +282,7 @@ const projects = [
     link: 'https://codeshawk.com/',
   },
   {
+    slug: 'ranked-designs',
     name: 'Ranked Designs',
     logo: '/projects/rankedDesigns/logo.webp',
     description: 'Ranked Designs delivers top-quality services with a team of experts who know how to make your brand stand out. We use the best tools and strategies to create solutions that are affordable, effective, and tailored to your needs. From websites to marketing materials, we handle everything to save you time and effort.',
@@ -304,6 +307,7 @@ const projects = [
     link: 'https://rankeddesigns.com/',
   },
   {
+    slug: 'job-portal',
     name: 'Job Portal',
     logo: '/projects/jobPortal/jobPortal.webp',
     description: ' Al Nafi Job Portal is a project of Al Nafi International College, designed to bridge the gap between employers and students or job candidates. It provides a seamless platform where employers can find skilled talent, and students or candidates can discover meaningful job and internship opportunities. The portal aims to simplify the recruitment process by connecting the right people with the right opportunities efficiently.',
@@ -329,6 +333,7 @@ const projects = [
     link: 'https://jobportal.alnafi.com/',
   },
   {
+    slug: 'college',
     name: 'College',
     logo: '/projects/islamicCollege/islamicCollegeLogo.svg',
     description: ' Al Nafi Islamic College is an educational institution dedicated to producing the next generation of traditionally trained scholars and leaders. Our mission is to serve as a leading model for traditional Islamic education globally through a balanced blend of spiritual training and academic studies. We empower our youth to grow into scholarly, self-sufficient, and spiritually grounded leaders who excel both in their faith and in the modern professional world. In addition to our classical Islamic studies, we teach our scholars the worldly skills necessary to excel in professional environments. Our dual-track system integrates modern qualifications, ensuring that our graduates are as capable in the workplace as they are in their spiritual endeavors.',
@@ -354,6 +359,7 @@ const projects = [
     link: 'https://islamic.alnafi.com/',
   },
   {
+    slug: 'rechik',
     name: 'Rechik',
     logo: '/projects/rechik/Logo-Dark.png',
     description: ' More than just a clothing brand, we stand for fairness, inclusivity, and value. Every piece we create reflects our dedication to providing fashion that embodies sophistication without compromise.',

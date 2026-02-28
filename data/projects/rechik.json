@@ -1,0 +1,25 @@
+{
+  "slug": "rechik",
+  "name": "Rechik",
+  "logo": "/projects/rechik/Logo-Dark.png",
+  "description": "More than just a clothing brand, we stand for fairness, inclusivity, and value. Every piece we create reflects our dedication to providing fashion that embodies sophistication without compromise.",
+  "achievements": ["E-Commerce", "Microservice Architecture", "Solo Development"],
+  "images": [
+    "/projects/rechik/1.jpg",
+    "/projects/rechik/2.jpg",
+    "/projects/rechik/3.jpg",
+    "/projects/rechik/4.jpg"
+  ],
+  "vuejs": true,
+  "javascript": true,
+  "nuxt": true,
+  "netlify": true,
+  "illustration": true,
+  "github": true,
+  "tailwind": true,
+  "python": true,
+  "type": "E-Commerce",
+  "status": "Completed",
+  "duration": "20 Days",
+  "link": "https://rechik.pk/"
+}

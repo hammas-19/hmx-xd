@@ -1,0 +1,26 @@
+{
+  "slug": "job-portal",
+  "name": "Job Portal",
+  "logo": "/projects/jobPortal/jobPortal.webp",
+  "description": "Al Nafi Job Portal is a project of Al Nafi International College, designed to bridge the gap between employers and students or job candidates. It provides a seamless platform where employers can find skilled talent, and students or candidates can discover meaningful job and internship opportunities. The portal aims to simplify the recruitment process by connecting the right people with the right opportunities efficiently.",
+  "achievements": ["PWA", "Microservice Architecture", "Cross-team Collaboration", "Short Deadline Success"],
+  "images": [
+    "/projects/jobPortal/1.jpg",
+    "/projects/jobPortal/3.jpg",
+    "/projects/jobPortal/4.jpg",
+    "/projects/jobPortal/6.jpg",
+    "/projects/jobPortal/7.jpg",
+    "/projects/jobPortal/2.jpg"
+  ],
+  "vuejs": true,
+  "javascript": true,
+  "nuxt": true,
+  "illustration": false,
+  "github": true,
+  "tailwind": true,
+  "python": true,
+  "type": "Progressive Web App",
+  "status": "Completed",
+  "duration": "45 Days",
+  "link": "https://jobportal.alnafi.com/"
+}
