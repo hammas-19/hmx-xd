@@ -25,6 +25,7 @@
     <HomeHero />
     <!-- Minimal Connection Status (Top Right) + QR Modal -->
     <ClientOnly>
+      <template v-if="isDesktopViewport">
       <!-- Connection Badge & Toggle Button -->
       <div class="fixed md:top-4 top-20 right-4 z-50 flex flex-col gap-3 items-end">
         <!-- Connection Status Badge -->
@@ -105,7 +106,7 @@
                 </p>
 
                 <!-- Actions -->
-                <!-- <div class="space-y-3">
+                <div class="space-y-3">
                   <a
                     :href="controllerUrl"
                     target="_blank"
@@ -121,12 +122,13 @@
                   >
                     Close
                   </button>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
         </div>
       </Transition>
+      </template>
     </ClientOnly>
     <div id="work">
       <HomeLatestWork :projects="projects" />
@@ -162,6 +164,7 @@ const { isConnected, joinSession, leaveSession, watchConnectionStatus, onConnect
 const qrContainer = ref<HTMLDivElement | null>(null)
 const sessionShown = ref(false)
 const viewerSessionId = ref('')
+const isDesktopViewport = ref(true)
 const controllerUrl = computed(() => {
   if (!viewerSessionId.value) return ''
   if (import.meta.client) {
@@ -173,17 +176,21 @@ const controllerUrl = computed(() => {
 const genId = () => Math.random().toString(36).slice(2, 10)
 
 onMounted(() => {
-  // Create and join a session as the viewer when socket connects
-  viewerSessionId.value = genId()
-  onConnected(() => joinSession(viewerSessionId.value))
-  watchConnectionStatus()
+  isDesktopViewport.value = import.meta.client ? window.innerWidth >= 768 : true
 
-  // Apply incoming scroll positions directly to the page
-  onScrollPosition((pos: number) => {
-    if (import.meta.client) {
-      window.scrollTo({ top: Math.max(0, pos), behavior: 'auto' })
-    }
-  })
+  // Create and join a session as the viewer when socket connects (desktop only)
+  if (isDesktopViewport.value) {
+    viewerSessionId.value = genId()
+    onConnected(() => joinSession(viewerSessionId.value, 'viewer'))
+    watchConnectionStatus()
+
+    // Apply incoming scroll positions directly to the page
+    onScrollPosition((pos: number) => {
+      if (import.meta.client) {
+        window.scrollTo({ top: Math.max(0, pos), behavior: 'auto' })
+      }
+    })
+  }
 
   // Generate QR when toggled on
   watch(sessionShown, async (shown) => {
@@ -216,8 +223,8 @@ onMounted(() => {
     }
   })
 
-  // Auto-show QR modal on mount
-  sessionShown.value = true
+  // Auto-show QR modal on mount (desktop only)
+  sessionShown.value = isDesktopViewport.value
 })
 
 onUnmounted(() => {

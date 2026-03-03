@@ -6,6 +6,8 @@
 import { ref, onBeforeUnmount } from 'vue'
 import type { Socket } from 'socket.io-client'
 
+type SessionRole = 'viewer' | 'controller'
+
 // Throttle function for callbacks
 function throttle(func: () => void, limit: number) {
   let inThrottle: boolean
@@ -22,6 +24,7 @@ export const useSecondScreen = () => {
   const socket = $socket as Socket // Type assertion for Socket instance
 
   const sessionId = ref<string>('')
+  const sessionRole = ref<SessionRole>('viewer')
   const isConnected = ref(false)
   const isSocketConnected = ref(false)
   const participantCount = ref(0)
@@ -57,9 +60,10 @@ export const useSecondScreen = () => {
    * Join a specific session room
    * Emits 'join-session' event to server
    */
-  const joinSession = (id: string) => {
+  const joinSession = (id: string, role: SessionRole = 'viewer') => {
     sessionId.value = id
-    socket.emit('join-session', { sessionId: id })
+    sessionRole.value = role
+    socket.emit('join-session', { sessionId: id, role })
   }
 
   /**
@@ -155,30 +159,43 @@ export const useSecondScreen = () => {
     })
   }
 
+  const handleConnect = () => {
+    isSocketConnected.value = true
+    if (sessionId.value) {
+      socket.emit('join-session', { sessionId: sessionId.value, role: sessionRole.value })
+    }
+  }
+
+  const handleDisconnect = () => {
+    isSocketConnected.value = false
+    isConnected.value = false
+    participantCount.value = 0
+    controllers.value = 0
+    viewers.value = 0
+  }
+
+  const handleParticipantCount = (count: number) => {
+    participantCount.value = count
+    isConnected.value = count >= 2
+  }
+
+  const handleSessionStatus = (data: { participantCount?: number; controllers?: number; viewers?: number }) => {
+    updateSessionStatus(data)
+  }
+
   /**
    * Listen to connection status from server
    */
   const watchConnectionStatus = () => {
-    socket.on('connect', () => {
-      isSocketConnected.value = true
-    })
+    socket.off('connect', handleConnect)
+    socket.off('disconnect', handleDisconnect)
+    socket.off('participant-count', handleParticipantCount)
+    socket.off('session-status', handleSessionStatus)
 
-    socket.on('disconnect', () => {
-      isSocketConnected.value = false
-      isConnected.value = false
-      participantCount.value = 0
-      controllers.value = 0
-      viewers.value = 0
-    })
-
-    socket.on('participant-count', (count: number) => {
-      participantCount.value = count
-      isConnected.value = count >= 2
-    })
-
-    socket.on('session-status', (data: { participantCount?: number; controllers?: number; viewers?: number }) => {
-      updateSessionStatus(data)
-    })
+    socket.on('connect', handleConnect)
+    socket.on('disconnect', handleDisconnect)
+    socket.on('participant-count', handleParticipantCount)
+    socket.on('session-status', handleSessionStatus)
   }
 
   // Cleanup on component unmount

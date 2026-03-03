@@ -145,7 +145,7 @@ const controllerPosition = ref(0)
 const padRef = ref<HTMLDivElement | null>(null)
 const socket = $socket as Socket
 
-const MAX_SCROLL_POSITION = 5000
+const MAX_SCROLL_POSITION = 5390
 const clampPosition = (pos: number) => Math.max(0, Math.min(pos, MAX_SCROLL_POSITION))
 
 // Virtual scroll helpers
@@ -229,7 +229,7 @@ onMounted(async () => {
   }
 
   // Join the session after socket connects
-  onConnected(() => joinSession(pageSessionId.value))
+  onConnected(() => joinSession(pageSessionId.value, 'controller'))
 
   // Watch connection status
   watchConnectionStatus()
