@@ -59,58 +59,93 @@
                 class="bg-snow rounded-3xl md:p-8 p-5 md:col-span-2">
                 <h2 class="text-boss font-doto md:text-2xl text-lg font-semibold mb-6">Technologies Used</h2>
                 <div class="flex flex-wrap gap-4">
-                  <Motion v-if="selectedProject?.illustration" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 0.6, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.illustration" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="uil:illustration" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Illustration</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.github" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 0.7, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.html" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="iconoir:html5" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">HTML</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.css" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="tdesign:css3" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">CSS</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.github" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="lucide:github" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">GitHub</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.nuxt" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 0.8, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.lenis" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="carbon:smoothing-cursor" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Lenis</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.nuxt" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="lineicons:nuxt" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Nuxt.js</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.tailwind" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 0.9, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.framer" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="ph:framer-logo" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Framer</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.tailwind" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="flowbite:tailwind-solid" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Tailwind CSS</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.python" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 1.0, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.python" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="proicons:python" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Python</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.javascript" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 1.1, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.gsap" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="simple-icons:gsap" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">GSAP</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.javascript" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="ri:javascript-fill" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">JavaScript</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.vuejs" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 1.2, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.vuejs" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="mdi:vuejs" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Vue.js</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.netlify" :initial="{ scale: 0, rotate: -180 }"
-                    :animate="{ scale: 1, rotate: 0 }" :exit="{ scale: 0, rotate: 180 }"
-                    :transition="{ duration: 0.4, delay: 1.3, type: 'spring', stiffness: 300 }"
+                  <Motion v-if="selectedProject?.netlify" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="teenyicons:netlify-solid" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Netlify</span>

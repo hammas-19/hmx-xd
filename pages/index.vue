@@ -165,6 +165,7 @@ const qrContainer = ref<HTMLDivElement | null>(null)
 const sessionShown = ref(false)
 const viewerSessionId = ref('')
 const isDesktopViewport = ref(true)
+const SESSION_MODAL_SEEN_KEY = 'viewer_qr_modal_seen'
 const controllerUrl = computed(() => {
   if (!viewerSessionId.value) return ''
   if (import.meta.client) {
@@ -223,8 +224,14 @@ onMounted(() => {
     }
   })
 
-  // Auto-show QR modal on mount (desktop only)
-  sessionShown.value = isDesktopViewport.value
+  // Auto-show QR modal only once per browser session (desktop only)
+  if (isDesktopViewport.value && import.meta.client) {
+    const hasSeenModal = sessionStorage.getItem(SESSION_MODAL_SEEN_KEY) === '1'
+    if (!hasSeenModal) {
+      sessionShown.value = true
+      sessionStorage.setItem(SESSION_MODAL_SEEN_KEY, '1')
+    }
+  }
 })
 
 onUnmounted(() => {
