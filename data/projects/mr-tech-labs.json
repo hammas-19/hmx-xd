@@ -1,0 +1,25 @@
+{
+    "slug": "mr-tech-labs",
+    "name": "MR Tech Labs",
+    "logo": "/projects/mrTechLabs/techLabsLogo.webp",
+    "description": "We provide rapid, highly effective strategies to dramatically increase your sales and build a highly recognized, desirable brand.",
+    "achievements": ["Creative Design", "Animations", "Solo Development", "Portfolio"],
+    "images": [
+      "/projects/mrTechLabs/1.png",
+      "/projects/mrTechLabs/2.png",
+      "/projects/mrTechLabs/3.png",
+      "/projects/mrTechLabs/4.png",
+      "/projects/mrTechLabs/5.png",
+      "/projects/mrTechLabs/6.png"
+    ],
+    "javascript": true,
+    "netlify": true,
+    "github": true,
+    "html": true,
+    "css": true,
+    "tailwind": true,
+    "type": "Portfolio",
+    "status": "Completed",
+    "duration": "5 Days",
+    "link": "https://mrtechlabs.com/"
+  }

@@ -190,11 +190,36 @@
 <script setup>
 import { useRoute } from 'vue-router'
 const route = useRoute()
+
+const scrollToPageTop = () => {
+  if (!import.meta.client) return
+
+  const nuxtApp = useNuxtApp()
+  const lenis = nuxtApp.$lenis
+
+  if (lenis && typeof lenis.scrollTo === 'function') {
+    lenis.scrollTo(0, { immediate: true, force: true })
+    return
+  }
+
+  window.scrollTo({ top: 0, behavior: 'auto' })
+}
+
+onMounted(() => {
+  scrollToPageTop()
+})
+
+watch(() => route.fullPath, async () => {
+  await nextTick()
+  scrollToPageTop()
+})
+
 const { data: selectedProject, pending, error } = await useAsyncData('selectedProject', async () => {
   const slug = route.params.slug
   const slugToFile = {
     'art-agency': 'art-agency',
     'codes-hawk': 'codes-hawk',
+    'mr-tech-labs': 'mr-tech-labs',
     'ranked-designs': 'ranked-designs',
     'job-portal': 'job-portal',
     'college': 'college',
