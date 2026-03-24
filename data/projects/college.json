@@ -1,0 +1,26 @@
+{
+  "slug": "college",
+  "name": "College",
+  "logo": "/projects/islamicCollege/islamicCollegeLogo.svg",
+  "description": "Al Nafi Islamic College is an educational institution dedicated to producing the next generation of traditionally trained scholars and leaders. Our mission is to serve as a leading model for traditional Islamic education globally through a balanced blend of spiritual training and academic studies. We empower our youth to grow into scholarly, self-sufficient, and spiritually grounded leaders who excel both in their faith and in the modern professional world. In addition to our classical Islamic studies, we teach our scholars the worldly skills necessary to excel in professional environments. Our dual-track system integrates modern qualifications, ensuring that our graduates are as capable in the workplace as they are in their spiritual endeavors.",
+  "achievements": ["PWA", "Microservice Architecture", "Cross-team Collaboration", "Complex designing"],
+  "images": [
+    "/projects/islamicCollege/1.jpg",
+    "/projects/islamicCollege/2.jpg",
+    "/projects/islamicCollege/3.jpg",
+    "/projects/islamicCollege/4.jpg",
+    "/projects/islamicCollege/5.jpg",
+    "/projects/islamicCollege/6.jpg"
+  ],
+  "vuejs": true,
+  "javascript": true,
+  "nuxt": true,
+  "illustration": false,
+  "github": true,
+  "tailwind": true,
+  "python": true,
+  "type": "E-Learning",
+  "status": "Completed",
+  "duration": "25 Days",
+  "link": "https://islamic.alnafi.com/"
+}

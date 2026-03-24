@@ -1,0 +1,25 @@
+{
+  "slug": "ranked-designs",
+  "name": "Ranked Designs",
+  "logo": "/projects/rankedDesigns/logo.webp",
+  "description": "Ranked Designs delivers top-quality services with a team of experts who know how to make your brand stand out. We use the best tools and strategies to create solutions that are affordable, effective, and tailored to your needs. From websites to marketing materials, we handle everything to save you time and effort.",
+  "achievements": ["Creative Design", "Animations", "Solo Development", "Short Deadline Success"],
+  "images": [
+    "/projects/rankedDesigns/1.jpg",
+    "/projects/rankedDesigns/2.jpg",
+    "/projects/rankedDesigns/3.jpg",
+    "/projects/rankedDesigns/4.jpg",
+    "/projects/rankedDesigns/5.jpg",
+    "/projects/rankedDesigns/6.jpg"
+  ],
+  "javascript": true,
+  "netlify": true,
+  "github": true,
+  "html": true,
+  "css": true,
+  "tailwind": true,
+  "type": "Portfolio",
+  "status": "Completed",
+  "duration": "10 Days",
+  "link": "https://rankeddesigns.com/"
+}

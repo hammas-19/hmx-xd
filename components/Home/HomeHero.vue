@@ -51,7 +51,7 @@
     </span>
     <span class=" w-full font-sans">
       <Motion
-        v-for="(word, index) in ['Humans...']" :key="`title-human-${index}`" class="inline-block mr-3"
+        v-for="(word, index) in ['People...']" :key="`title-human-${index}`" class="inline-block mr-3"
         :initial="{ opacity: 0, y: 15, rotateX: -60 }" :animate="{ opacity: 1, y: 0, rotateX: 0 }" :transition="{
           duration: 0.3,
           delay: 0.01 + (index * 0.02),
@@ -93,7 +93,7 @@
 import { computed } from 'vue'
 
 // Bold title
-const titleText = "Bridging  logic,  design  &  humans"
+const titleText = "Bridging  logic,  design  &  people..."
 const titleWords = computed(() => titleText.split(' '))
 
 // Lighter subtitle (2 lines)

@@ -25,6 +25,7 @@
     <HomeHero />
     <!-- Minimal Connection Status (Top Right) + QR Modal -->
     <ClientOnly>
+      <template v-if="isDesktopViewport">
       <!-- Connection Badge & Toggle Button -->
       <div class="fixed md:top-4 top-20 right-4 z-50 flex flex-col gap-3 items-end">
         <!-- Connection Status Badge -->
@@ -127,6 +128,7 @@
           </div>
         </div>
       </Transition>
+      </template>
     </ClientOnly>
     <div id="work">
       <HomeLatestWork :projects="projects" />
@@ -162,6 +164,8 @@ const { isConnected, joinSession, leaveSession, watchConnectionStatus, onConnect
 const qrContainer = ref<HTMLDivElement | null>(null)
 const sessionShown = ref(false)
 const viewerSessionId = ref('')
+const isDesktopViewport = ref(true)
+const SESSION_MODAL_SEEN_KEY = 'viewer_qr_modal_seen'
 const controllerUrl = computed(() => {
   if (!viewerSessionId.value) return ''
   if (import.meta.client) {
@@ -173,17 +177,21 @@ const controllerUrl = computed(() => {
 const genId = () => Math.random().toString(36).slice(2, 10)
 
 onMounted(() => {
-  // Create and join a session as the viewer when socket connects
-  viewerSessionId.value = genId()
-  onConnected(() => joinSession(viewerSessionId.value))
-  watchConnectionStatus()
+  isDesktopViewport.value = import.meta.client ? window.innerWidth >= 768 : true
 
-  // Apply incoming scroll positions directly to the page
-  onScrollPosition((pos: number) => {
-    if (import.meta.client) {
-      window.scrollTo({ top: Math.max(0, pos), behavior: 'auto' })
-    }
-  })
+  // Create and join a session as the viewer when socket connects (desktop only)
+  if (isDesktopViewport.value) {
+    viewerSessionId.value = genId()
+    onConnected(() => joinSession(viewerSessionId.value, 'viewer'))
+    watchConnectionStatus()
+
+    // Apply incoming scroll positions directly to the page
+    onScrollPosition((pos: number) => {
+      if (import.meta.client) {
+        window.scrollTo({ top: Math.max(0, pos), behavior: 'auto' })
+      }
+    })
+  }
 
   // Generate QR when toggled on
   watch(sessionShown, async (shown) => {
@@ -216,8 +224,14 @@ onMounted(() => {
     }
   })
 
-  // Auto-show QR modal on mount
-  sessionShown.value = true
+  // Auto-show QR modal only once per browser session (desktop only)
+  if (isDesktopViewport.value && import.meta.client) {
+    const hasSeenModal = sessionStorage.getItem(SESSION_MODAL_SEEN_KEY) === '1'
+    if (!hasSeenModal) {
+      sessionShown.value = true
+      sessionStorage.setItem(SESSION_MODAL_SEEN_KEY, '1')
+    }
+  }
 })
 
 onUnmounted(() => {
@@ -226,6 +240,7 @@ onUnmounted(() => {
 
 const projects = [
   {
+    slug: 'art-agency',
     name: 'Art Agency',
     // logo: '/projects/codesHawk/logo.jpeg',
     description: 'WE CRAFT STRATEGIC, CREATIVE SOLUTIONS THAT COMBINE SMART IDEAS WITH STUNNING, FUNCTIONAL DESIGN. BY OBSESSING OVER THE DETAILS, WE INSPIRE ACTION AND DELIVER MEASURABLE RESULTS, EMPOWERING BRANDS TO THRIVE IN A DYNAMIC, EVER-EVOLVING MARKETPLACE.',
@@ -255,6 +270,7 @@ const projects = [
     link: 'https://artdotagency.netlify.app/',
   },
   {
+    slug: 'codes-hawk',
     name: 'Codes Hawk',
     logo: '/projects/codesHawk/logo.jpeg',
     description: 'CodesHawk delivers cutting-edge web, AI, and digital marketing solutions to drive your business forward. We also offer expert web and mobile software engineering, along with SEO services to enhance your online presence, attract more traffic, and boost conversions. Trust us to help you achieve digital success.',
@@ -280,6 +296,7 @@ const projects = [
     link: 'https://codeshawk.com/',
   },
   {
+    slug: 'ranked-designs',
     name: 'Ranked Designs',
     logo: '/projects/rankedDesigns/logo.webp',
     description: 'Ranked Designs delivers top-quality services with a team of experts who know how to make your brand stand out. We use the best tools and strategies to create solutions that are affordable, effective, and tailored to your needs. From websites to marketing materials, we handle everything to save you time and effort.',
@@ -304,6 +321,7 @@ const projects = [
     link: 'https://rankeddesigns.com/',
   },
   {
+    slug: 'job-portal',
     name: 'Job Portal',
     logo: '/projects/jobPortal/jobPortal.webp',
     description: ' Al Nafi Job Portal is a project of Al Nafi International College, designed to bridge the gap between employers and students or job candidates. It provides a seamless platform where employers can find skilled talent, and students or candidates can discover meaningful job and internship opportunities. The portal aims to simplify the recruitment process by connecting the right people with the right opportunities efficiently.',
@@ -329,6 +347,7 @@ const projects = [
     link: 'https://jobportal.alnafi.com/',
   },
   {
+    slug: 'college',
     name: 'College',
     logo: '/projects/islamicCollege/islamicCollegeLogo.svg',
     description: ' Al Nafi Islamic College is an educational institution dedicated to producing the next generation of traditionally trained scholars and leaders. Our mission is to serve as a leading model for traditional Islamic education globally through a balanced blend of spiritual training and academic studies. We empower our youth to grow into scholarly, self-sufficient, and spiritually grounded leaders who excel both in their faith and in the modern professional world. In addition to our classical Islamic studies, we teach our scholars the worldly skills necessary to excel in professional environments. Our dual-track system integrates modern qualifications, ensuring that our graduates are as capable in the workplace as they are in their spiritual endeavors.',
@@ -354,6 +373,7 @@ const projects = [
     link: 'https://islamic.alnafi.com/',
   },
   {
+    slug: 'rechik',
     name: 'Rechik',
     logo: '/projects/rechik/Logo-Dark.png',
     description: ' More than just a clothing brand, we stand for fairness, inclusivity, and value. Every piece we create reflects our dedication to providing fashion that embodies sophistication without compromise.',

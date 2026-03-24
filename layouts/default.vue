@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen" ref="lenisScrollContainer">
     <!-- Skip link for accessibility -->
     <a href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white p-2 rounded z-50">
@@ -24,6 +24,19 @@
 </template>
 
 <script setup>
+import { ref, onMounted, inject } from 'vue'
+const lenisScrollContainer = ref(null)
+
+onMounted(() => {
+  if (process.client) {
+    // Optionally, you can access the container here if needed
+    const lenis = inject('lenis')
+    // If you want to set a custom wrapper/container:
+    // if (lenis && lenisScrollContainer.value) {
+    //   lenis.wrapper = lenisScrollContainer.value
+    // }
+  }
+})
 // Global SEO defaults
 useHead({
   htmlAttrs: {

@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
    * Can be either a viewer (desktop) or controller (mobile)
    */
   socket.on('join-session', (data) => {
-    const { sessionId } = data
+    const { sessionId, role: requestedRole } = data || {}
     if (!sessionId) {
       socket.emit('error', { message: 'Invalid session ID' })
       return
@@ -79,7 +79,9 @@ io.on('connection', (socket) => {
     // Store client role based on user agent or explicit flag
     const userAgent = socket.handshake.headers['user-agent'] || ''
     const isMobile = /mobile|android|iphone|ipad/i.test(userAgent)
-    const role = isMobile ? 'controller' : 'viewer'
+    const role = requestedRole === 'controller' || requestedRole === 'viewer'
+      ? requestedRole
+      : (isMobile ? 'controller' : 'viewer')
 
     // Store socket ID in session
     if (role === 'controller') {
@@ -139,7 +141,7 @@ io.on('connection', (socket) => {
    * Client leaves session
    */
   socket.on('leave-session', (data) => {
-    const { sessionId } = data || { sessionId: socket.data.sessionId }
+    const sessionId = data?.sessionId || socket.data.sessionId
 
     if (!sessionId) return
 
@@ -201,6 +203,12 @@ io.on('connection', (socket) => {
         if (remainingParticipants > 0) {
           // Update remaining clients
           io.to(`session-${sessionId}`).emit('participant-count', remainingParticipants)
+          io.to(`session-${sessionId}`).emit('session-status', {
+            sessionId,
+            participantCount: remainingParticipants,
+            controllers: session.controllers.size,
+            viewers: session.viewers.size,
+          })
         } else {
           // Clean up empty session
           sessions.delete(sessionId)
