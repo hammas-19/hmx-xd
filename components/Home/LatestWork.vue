@@ -37,6 +37,7 @@
                       </template>
                       <div class="flex gap-2 flex-col">
                         <span v-if="project.inProgress" class="bg-[#f7c44c] w-fit px-2.5 py-0.5 text-xs rounded-full">Work In-progress</span>
+                        <span v-if="project.drafted" class="bg-[#f9a04d] w-fit px-2.5 py-0.5 text-xs rounded-full text-boss">Drafted</span>
                         <span class="text-boss font-sora md:text-4xl sm:text-xl text-sm font-black uppercase">{{
                           project.name }}</span>
                       </div>
@@ -67,6 +68,32 @@
                     {{ project.description }}
                   </p>
                   <div class="flex flex-wrap md:gap-3 gap-1">
+                    <div v-if="project.next" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="file-icons:nextjs"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
+                    <div v-if="project.nuxt" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="lineicons:nuxt"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
+                    <div v-if="project.vuejs" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="mdi:vuejs"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
+                    <div v-if="project.react" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="ri:reactjs-fill"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
+                    <div v-if="project.gsap"
+                      class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="simple-icons:gsap"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
+                    <div v-if="project.framer"
+                      class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
+                      <Icon name="ph:framer-logo"
+                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
+                    </div>
                     <div v-if="project.illustration"
                       class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                       <Icon name="uil:illustration"
@@ -90,15 +117,6 @@
                       <Icon name="carbon:smoothing-cursor"
                         class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
                     </div>
-                    <div v-if="project.nuxt" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
-                      <Icon name="lineicons:nuxt"
-                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
-                    </div>
-                    <div v-if="project.framer"
-                      class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
-                      <Icon name="ph:framer-logo"
-                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
-                    </div>
                     <div v-if="project.tailwind"
                       class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                       <Icon name="flowbite:tailwind-solid"
@@ -109,18 +127,9 @@
                       <Icon name="proicons:python"
                         class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
                     </div>
-                    <div v-if="project.gsap"
-                      class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
-                      <Icon name="simple-icons:gsap"
-                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
-                    </div>
                     <div v-if="project.javascript"
                       class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
                       <Icon name="ri:javascript-fill"
-                        class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
-                    </div>
-                    <div v-if="project.vuejs" class="bg-white/10 md:p-2 p-1 rounded-2xl flex justify-center items-center">
-                      <Icon name="mdi:vuejs"
                         class="md:min-h-[40px] min-h-[20px] md:min-w-[40px] min-w-[20px] text-bubbles" />
                     </div>
                     <div v-if="project.netlify"

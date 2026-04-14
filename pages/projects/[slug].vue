@@ -59,6 +59,48 @@
                 class="bg-snow rounded-3xl md:p-8 p-5 md:col-span-2">
                 <h2 class="text-boss font-doto md:text-2xl text-lg font-semibold mb-6">Technologies Used</h2>
                 <div class="flex flex-wrap gap-4">
+                  <Motion v-if="selectedProject?.next" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="file-icons:nextjs" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Next.js</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.nuxt" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="lineicons:nuxt" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Nuxt.js</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.vuejs" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="mdi:vuejs" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Vue.js</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.react" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="ri:reactjs-fill" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">React.js</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.gsap" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="simple-icons:gsap" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">GSAP</span>
+                  </Motion>
+                  <Motion v-if="selectedProject?.framer" :initial="{ opacity: 0 }"
+                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
+                    :transition="{ duration: 0.3, ease: 'easeOut' }"
+                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
+                    <Icon name="ph:framer-logo" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
+                    <span class="md:text-lg text-sm text-boss font-medium">Framer</span>
+                  </Motion>
                   <Motion v-if="selectedProject?.illustration" :initial="{ opacity: 0 }"
                     :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
                     :transition="{ duration: 0.3, ease: 'easeOut' }"
@@ -94,20 +136,6 @@
                     <Icon name="carbon:smoothing-cursor" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Lenis</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.nuxt" :initial="{ opacity: 0 }"
-                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
-                    :transition="{ duration: 0.3, ease: 'easeOut' }"
-                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
-                    <Icon name="lineicons:nuxt" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
-                    <span class="md:text-lg text-sm text-boss font-medium">Nuxt.js</span>
-                  </Motion>
-                  <Motion v-if="selectedProject?.framer" :initial="{ opacity: 0 }"
-                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
-                    :transition="{ duration: 0.3, ease: 'easeOut' }"
-                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
-                    <Icon name="ph:framer-logo" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
-                    <span class="md:text-lg text-sm text-boss font-medium">Framer</span>
-                  </Motion>
                   <Motion v-if="selectedProject?.tailwind" :initial="{ opacity: 0 }"
                     :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
                     :transition="{ duration: 0.3, ease: 'easeOut' }"
@@ -122,26 +150,12 @@
                     <Icon name="proicons:python" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">Python</span>
                   </Motion>
-                  <Motion v-if="selectedProject?.gsap" :initial="{ opacity: 0 }"
-                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
-                    :transition="{ duration: 0.3, ease: 'easeOut' }"
-                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
-                    <Icon name="simple-icons:gsap" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
-                    <span class="md:text-lg text-sm text-boss font-medium">GSAP</span>
-                  </Motion>
                   <Motion v-if="selectedProject?.javascript" :initial="{ opacity: 0 }"
                     :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
                     :transition="{ duration: 0.3, ease: 'easeOut' }"
                     class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
                     <Icon name="ri:javascript-fill" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
                     <span class="md:text-lg text-sm text-boss font-medium">JavaScript</span>
-                  </Motion>
-                  <Motion v-if="selectedProject?.vuejs" :initial="{ opacity: 0 }"
-                    :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
-                    :transition="{ duration: 0.3, ease: 'easeOut' }"
-                    class="bg-boss/10 p-3 rounded-2xl flex items-center md:gap-3 gap-1">
-                    <Icon name="mdi:vuejs" class="h-8 w-8 text-boss md:min-h-7 min-h-4 md:min-w-7 min-w-4" />
-                    <span class="md:text-lg text-sm text-boss font-medium">Vue.js</span>
                   </Motion>
                   <Motion v-if="selectedProject?.netlify" :initial="{ opacity: 0 }"
                     :animate="{ opacity: 1 }" :exit="{ opacity: 0 }"
@@ -219,6 +233,7 @@ const { data: selectedProject, pending, error } = await useAsyncData('selectedPr
   const slugToFile = {
     'art-agency': 'art-agency',
     'gec-pathways': 'gec-pathways',
+    'gec-drafted': 'gec-drafted',
     'codes-hawk': 'codes-hawk',
     'mr-tech-labs': 'mr-tech-labs',
     'ranked-designs': 'ranked-designs',
