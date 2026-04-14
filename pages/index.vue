@@ -106,7 +106,7 @@
                 </p>
 
                 <!-- Actions -->
-                <!-- <div class="space-y-3">
+                <div class="space-y-3">
                   <a
                     :href="controllerUrl"
                     target="_blank"
@@ -122,7 +122,7 @@
                   >
                     Close
                   </button>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
