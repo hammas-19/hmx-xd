@@ -240,6 +240,36 @@ onUnmounted(() => {
 
 const projects = [
   {
+    slug: 'gec-pathways',
+    name: 'GEC Pathways',
+    logo: '/projects/gecPathways/gec-logo.webp',
+    description: '"Global Educational Consultants - Your trusted partner for studying in China. With offices in different countries across the globe."',
+    achievements: ['Creative Design', 'Animations', 'Solo Development', 'Portfolio', 'Chat Integration', 'Backend Integration'],
+    images: [
+      '/projects/gecPathways/1.png',
+      '/projects/gecPathways/2.png',
+      '/projects/gecPathways/3.png',
+      '/projects/gecPathways/4.png',
+      '/projects/gecPathways/5.png',
+      '/projects/gecPathways/6.png'
+    ],
+    // inProgress: true,
+    javascript: true,
+    netlify: true,
+    lenis: true,
+    github: true,
+    nuxt: true,
+    vuejs: true,
+    // gsap: true,
+    framer: true,
+    css: true,
+    tailwind: true,
+    type: 'Portfolio',
+    status: 'Completed',
+    duration: '20 days',
+    link: 'https://gecpathways.com/',
+  },
+  {
     slug: 'art-agency',
     name: 'Art Agency',
     // logo: '/projects/codesHawk/logo.jpeg',

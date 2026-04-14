@@ -218,6 +218,7 @@ const { data: selectedProject, pending, error } = await useAsyncData('selectedPr
   const slug = route.params.slug
   const slugToFile = {
     'art-agency': 'art-agency',
+    'gec-pathways': 'gec-pathways',
     'codes-hawk': 'codes-hawk',
     'mr-tech-labs': 'mr-tech-labs',
     'ranked-designs': 'ranked-designs',
