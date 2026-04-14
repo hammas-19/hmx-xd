@@ -145,7 +145,7 @@ const controllerPosition = ref(0)
 const padRef = ref<HTMLDivElement | null>(null)
 const socket = $socket as Socket
 
-const MAX_SCROLL_POSITION = 5860
+const MAX_SCROLL_POSITION = 6330
 const clampPosition = (pos: number) => Math.max(0, Math.min(pos, MAX_SCROLL_POSITION))
 
 // Virtual scroll helpers

@@ -300,6 +300,32 @@ const projects = [
     link: 'https://artdotagency.netlify.app/',
   },
   {
+  "slug": "codes-hawk",
+  "name": "Codes Hawk",
+  "logo": "/projects/codesHawk/logo.jpeg",
+  "description": "CodesHawk delivers cutting-edge web, AI, and digital marketing solutions to drive your business forward. We also offer expert web and mobile software engineering, along with SEO services to enhance your online presence, attract more traffic, and boost conversions. Trust us to help you achieve digital success.",
+  "achievements": ["Creative Design", "Animations", "Solo Development", "Portfolio"],
+  "images": [
+    "/projects/codesHawk/1.jpg",
+    "/projects/codesHawk/2.jpg",
+    "/projects/codesHawk/3.jpg",
+    "/projects/codesHawk/4.jpg",
+    "/projects/codesHawk/5.jpg"
+  ],
+  "javascript": true,
+  "netlify": true,
+  "github": true,
+  "nuxt": true,
+  "vuejs": true,
+  "framer": true,
+  "css": true,
+  "tailwind": true,
+  "type": "Portfolio",
+  "status": "On stage",
+  "duration": "---",
+  "link": "https://codeshawk.com/"
+  },
+  {
     slug: 'gec-drafted',
     name: '(Drafted) GEC Pathways',
     logo: '/projects/gecPathways/gec-logo.webp',
