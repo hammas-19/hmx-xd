@@ -12,6 +12,7 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
+    "@nuxt/content": "^3.16.1",
     "@nuxt/eslint": "^1.4.1",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.14.0",

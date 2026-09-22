@@ -13,6 +13,7 @@ export interface Project {
   status?: string
   duration?: string
   link?: string
+  [key: string]: any
 }
 
 export interface CategoryOption {
@@ -28,8 +29,7 @@ export const projectCategories: CategoryOption[] = [
   { id: 'playground', label: 'Playground' },
 ]
 
-// Project display ordering
-const orderedSlugs = [
+export const orderedSlugs = [
   'gec-pathways',
   'art-agency',
   'codes-hawk',
@@ -42,20 +42,20 @@ const orderedSlugs = [
 ]
 
 export const useProjects = () => {
-  const modules = import.meta.glob<Project | { default: Project }>('../data/projects/*.json', {
+  // Automatically loads all JSON project files in data/projects/
+  const jsonModules = import.meta.glob<Project | { default: Project }>('../data/projects/*.json', {
     eager: true,
   })
 
-  const rawProjects: Project[] = Object.values(modules).map((mod: any) => mod.default || mod)
+  const rawProjects: Project[] = Object.values(jsonModules).map((mod: any) => mod.default || mod)
 
-  // Sort by orderedSlugs with remaining projects placed at the end
   const allProjects: Project[] = [...rawProjects].sort((a, b) => {
     const indexA = orderedSlugs.indexOf(a.slug)
     const indexB = orderedSlugs.indexOf(b.slug)
     if (indexA !== -1 && indexB !== -1) return indexA - indexB
     if (indexA !== -1) return -1
     if (indexB !== -1) return 1
-    return a.name.localeCompare(b.name)
+    return (a.name || '').localeCompare(b.name || '')
   })
 
   const getProjectBySlug = (slug: string): Project | undefined => {

@@ -175,12 +175,6 @@ watch(() => route.fullPath, async () => {
 })
 
 const slug = computed(() => route.params.slug as string)
-
-const { data: selectedProject, pending, error } = await useAsyncData(
-  () => `project-${slug.value}`,
-  () => Promise.resolve(getProjectBySlug(slug.value) || null),
-  {
-    watch: [slug]
-  }
-)
+const selectedProject = computed(() => getProjectBySlug(slug.value))
+const pending = computed(() => false)
 </script>
