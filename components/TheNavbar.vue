@@ -3,8 +3,8 @@
     class="w-full fixed gap-2 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between bg-gradient-to-t from-[#ffffff22] to-[#ffffffeb] backdrop-blur-md">
     <!-- Logo -->
     
-     <NuxtLink to="/" data-pointer="text" data-pointer-text="Hammas Masood" class="m-2 rounded-full bg-black">
-        <img src="/home/signLogo.png" class="w-[43px] h-fit px-2 py-[3px]" alt="Hammas Masood">
+     <NuxtLink to="/" data-pointer="text" data-pointer-text="Hammas Masood" class="m-2 rounded-full bg-black flex-shrink-0 inline-flex items-center justify-center">
+        <img src="/home/signLogo.png" class="w-[43px] h-auto object-contain px-2 py-[3px]" alt="Hammas Masood">
       </NuxtLink>
     
     <nav class="w-fit my-3">

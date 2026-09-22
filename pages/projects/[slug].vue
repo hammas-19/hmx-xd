@@ -14,7 +14,7 @@
               :exit="{ x: 50, opacity: 0 }" :transition="{ duration: 0.5, delay: 0.3, ease: 'easeOut' }"
               class="flex sm:items-center sm:gap-6 gap-2 sm:flex-row flex-col sm:mb-6">
               <img v-if="selectedProject?.logo" :src="selectedProject.logo"
-                class="h-16 w-fit object-cover rounded-xl p-2" :alt="selectedProject.name">
+                class="h-16 w-auto object-contain flex-shrink-0 rounded-xl p-2" :alt="selectedProject.name">
               <h1 data-pointer="site"
                 class="text-boss font-sora sm:text-4xl text-2xl md:text-6xl font-black uppercase cursor-grabbing">
                 <a :href="selectedProject?.link" target="_blank">

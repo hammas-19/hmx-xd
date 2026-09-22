@@ -5,7 +5,7 @@
     <ClientOnly>
       <!-- Logo - Fixed Top Left -->
       <div class="fixed top-4 left-4 z-50">
-        <img src="/home/signLogo.png" class="w-[43px] h-fit px-2 py-[3px]" alt="Hammas Masood">
+        <img src="/home/signLogo.png" class="w-[43px] h-auto object-contain px-2 py-[3px]" alt="Hammas Masood">
       </div>
 
       <!-- Connection Status Badge & Leave Button - Fixed Top Right -->
