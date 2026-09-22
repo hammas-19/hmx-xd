@@ -1,0 +1,33 @@
+{
+    "slug": "esa-crew",
+    "name": "ESA Crew",
+    "description": "Get Evaluated Online for an Emotional Support Animal Letter. Complete a confidential online assessment and connect with a licensed mental health professional. If clinically appropriate, receive a legally compliant ESA or PSD letter.",
+    "category": "in-progress",
+    "achievements": [
+        "Creative Design",
+        "Animations",
+        "Culture",
+        "Pet Care",
+        "Portfolio"
+    ],
+    "images": [
+        "/projects/esaCrew/1.png",
+        "/projects/esaCrew/2.png",
+        "/projects/esaCrew/3.png",
+        "/projects/esaCrew/4.png",
+        "/projects/esaCrew/5.png",
+        "/projects/esaCrew/6.png"
+    ],
+    "technologies": [
+        "javascript",
+        "netlify",
+        "github",
+        "html",
+        "css",
+        "tailwind"
+    ],
+    "type": "Portfolio",
+    "status": "in Progress",
+    "duration": "--",
+    "link": "https://pext.netlify.app/"
+}

@@ -30,14 +30,16 @@ export const projectCategories: CategoryOption[] = [
 ]
 
 export const orderedSlugs = [
+  'esa-crew',
+  'agency-demo',
   'gec-pathways',
-  'art-agency',
   'codes-hawk',
+  'college',
   'gec-drafted',
   'mr-tech-labs',
   'ranked-designs',
   'job-portal',
-  'college',
+  'art-agency',
   'rechik',
 ]
 

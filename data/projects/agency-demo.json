@@ -1,0 +1,37 @@
+{
+    "slug": "agency-demo",
+    "name": "Agency Demos (For sale)",
+    "description": "Agency Demos is a collection of demos for an agency website. It includes features like animations, scrolling, and other features.",
+    "category": "playground",
+    "achievements": [
+        "Creative Design",
+        "Animations",
+        "Portfolio",
+        "GSAP Animations",
+        "For sale"
+    ],
+    "images": [
+        "/projects/demoAgency/1.png",
+        "/projects/demoAgency/2.png",
+        "/projects/demoAgency/3.png",
+        "/projects/demoAgency/4.png",
+        "/projects/demoAgency/5.png",
+        "/projects/demoAgency/6.png"
+    ],
+    "technologies": [
+        "javascript",
+        "netlify",
+        "lenis",
+        "github",
+        "nuxt",
+        "vuejs",
+        "gsap",
+        "framer",
+        "css",
+        "tailwind"
+    ],
+    "type": "Portfolio",
+    "status": "Deployed",
+    "duration": "---",
+    "link": "https://agencydemos.netlify.app/"
+}
