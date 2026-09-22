@@ -3,7 +3,15 @@
   "name": "GEC Pathways",
   "logo": "/projects/gecPathways/gec-logo.webp",
   "description": "Global Educational Consultants - Your trusted partner for studying in China. With offices in different countries across the globe.",
-  "achievements": ["Creative Design", "Animations", "Solo Development", "Portfolio", "Chat Integration", "Backend Integration"],
+  "category": "completed",
+  "achievements": [
+    "Creative Design",
+    "Animations",
+    "Solo Development",
+    "Portfolio",
+    "Chat Integration",
+    "Backend Integration"
+  ],
   "images": [
     "/projects/gecPathways/1.png",
     "/projects/gecPathways/2.png",
@@ -12,15 +20,17 @@
     "/projects/gecPathways/5.png",
     "/projects/gecPathways/6.png"
   ],
-  "javascript": true,
-  "netlify": true,
-  "lenis": true,
-  "github": true,
-  "nuxt": true,
-  "vuejs": true,
-  "framer": true,
-  "css": true,
-  "tailwind": true,
+  "technologies": [
+    "javascript",
+    "netlify",
+    "lenis",
+    "github",
+    "nuxt",
+    "vuejs",
+    "framer",
+    "css",
+    "tailwind"
+  ],
   "type": "Consultancy",
   "status": "Completed",
   "duration": "20 days",
